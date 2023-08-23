@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MOT Lovely Eats</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <!-- 画像をここに追加 -->
+          <img src="<%= asset_path('lovely_logo.jpg') %>" alt="ロゴ" class="logo-img">
+        </div>
+        <div class="col-md-9">
+          <div class="header-title-area">
+            <h1 class="logo">MOT Lovely Eats</h1>
+            <p class="text-sub">金沢大学学生の環境充実プロジェクトによる、キャンパス内の“食”情報検索サイトです。</p>
+          </div>
+           <span class="login-links">
+            <%= link_to 'ユーザーアカウント作成', '#' %> |
+            <%= link_to 'ユーザーログイン', '#' %> |
+            <%= link_to '出店者ログイン', '#' %> |
+            <%= link_to '新規出店希望者はこちら', '#' %>
+          </span>
+        </div>
+      </div>
+    </div>
+  </header>
+  <%= yield %>
+</body>
+ <p class="notice"><%= notice %></p>
+ <p class="alert"><%= alert %></p>
+</html>

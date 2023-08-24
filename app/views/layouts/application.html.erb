@@ -22,9 +22,13 @@
           </div>
            <span class="login-links">
             <%= link_to 'ユーザーアカウント作成', '#' %> |
-            <%= link_to 'ユーザーログイン', '#' %> |
+            <%= link_to 'ユーザーログイン', user_session_path %> |
             <%= link_to '出店者ログイン', '#' %> |
             <%= link_to '新規出店希望者はこちら', '#' %>
+            <%= form_tag destroy_user_session_path, method: :delete do %>
+              <%= submit_tag 'ログアウト' %>
+                <% end %>
+            <%= link_to '管理者限定ログイン', rails_admin_path %>
           </span>
         </div>
       </div>

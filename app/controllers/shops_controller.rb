@@ -4,17 +4,17 @@ class ShopsController < ApplicationController
   end
   
   def create
-   @shop = current_user.shops.build(shop_params)
-   if @shop.save
-    redirect_to user_dashboard_path, notice: 'おみせを登録しました。'
-   else
-    render :new
-   end
- end
+    @shop = current_user.shops.build(shop_params)
+    if @shop.save
+      redirect_to user_dashboard_path, notice: 'おみせを登録しました。'
+    else
+      render :new
+    end
+  end
 
- private
+  private
 
- def shop_params
-   params.require(:shop).permit(:name, :description, :image)
- end
+  def shop_params
+    params.require(:shop).permit(:name, :description, :image)
+  end
 end

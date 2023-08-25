@@ -1,6 +1,6 @@
 <h2>新規おみせ登録</h2>
 
-<%= form_with(model: @shop, url: user_shop_new_user_path, local: true) do |form| %>
+<%= form_with(model: @shop, url: user_shop_create_user_path(current_user), method: :post) do |form| %>
   <%= form.label :name %>
   <%= form.text_field :name %>
 

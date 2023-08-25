@@ -11,6 +11,7 @@ resources :users do
   member do
     get :dashboard
     get :shop_new, to: 'shops#new', as: :user_shop_new
+    post :shop_create, to: 'shops#create', as: :user_shop_create
   end
 end
 

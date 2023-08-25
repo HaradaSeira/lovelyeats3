@@ -7,4 +7,8 @@ Rails.application.routes.draw do
   
   get 'user_dashboard', to: 'users#dashboard', as: :user_dashboard
   
+  #resources :users do
+   # get :dashboard, on: member
+  #end
+  
   end

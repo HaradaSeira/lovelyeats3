@@ -1,1 +1,15 @@
 <h2><%= current_user.email %> さんのおみせ一覧</h2>
+
+ <% if @shops.any? %>
+  <ul>
+    <% @shops.each do |shop| %>
+     <li>
+      <h3><%= shop.name %></h3>
+     </li>
+   <% end %>
+  </ul>
+ <% else %>
+  <p>おみせは登録されていません</p>
+ <% end %>
+ 
+  <h3><%= link_to '新しいおみせを追加する', '#' %></h3>

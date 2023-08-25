@@ -4,7 +4,7 @@
   <ul>
     <% @shops.each do |shop| %>
       <li>
-        <h3><%= shop.name %></h3>
+       <%= link_to shop.name, shop_path(shop) %>
       </li>
     <% end %>
   </ul>

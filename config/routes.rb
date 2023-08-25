@@ -7,13 +7,16 @@ Rails.application.routes.draw do
   
   get 'user_dashboard', to: 'users#dashboard', as: :user_dashboard
   
-resources :users do
-  member do
-    get :dashboard
-    get :shop_new, to: 'shops#new', as: :user_shop_new
-    post :shop_create, to: 'shops#create', as: :user_shop_create
-  end
-end
+ resources :users do
+   member do
+     get :dashboard
+     get :shop_new, to: 'shops#new', as: :user_shop_new
+     post :shop_create, to: 'shops#create', as: :user_shop_create
+   end
+ end
 
-resources :shops, only: [:create]
+  resources :shops, only: [:create] do
+  # Add a route for showing a specific shop's details
+  get :show, on: :member
+ end
 end

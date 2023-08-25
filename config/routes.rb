@@ -7,8 +7,12 @@ Rails.application.routes.draw do
   
   get 'user_dashboard', to: 'users#dashboard', as: :user_dashboard
   
-  #resources :users do
-   # get :dashboard, on: member
-  #end
-  
+resources :users do
+  member do
+    get :dashboard
+    get :shop_new, to: 'shops#new', as: :user_shop_new
   end
+end
+
+resources :shops, only: [:create]
+end

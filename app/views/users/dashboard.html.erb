@@ -4,7 +4,12 @@
   <ul>
     <% @shops.each do |shop| %>
       <li>
-       <%= link_to shop.name, shop_path(shop) %>
+        <% if shop.image.present? %>
+          <%= image_tag shop.image.url, class: "shop-img" %>
+        <% else %>
+          <%= image_tag 'store.jpg', alt: 'デフォルト画像', class: "shop-img" %>
+        <% end %>
+        <%= link_to shop.name, shop_path(shop) %>
       </li>
     <% end %>
   </ul>

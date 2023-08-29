@@ -19,4 +19,8 @@ Rails.application.routes.draw do
   # Add a route for showing a specific shop's details
   get :show, on: :member
  end
+ 
+ resources :shops do
+  resources :events
+ end
 end

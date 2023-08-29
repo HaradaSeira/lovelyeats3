@@ -23,7 +23,7 @@
            <span class="login-links">
            <% if user_signed_in? %>
              
-            <%= link_to 'ダッシュボード', user_dashboard_path(current_user) %> |
+            <%= link_to 'おみせ一覧', user_dashboard_path(current_user) %> |
             <%= link_to 'TOPページ', '#' %> |
              <%= form_tag destroy_user_session_path, method: :delete do %>
               <%= submit_tag 'ログアウト' %>

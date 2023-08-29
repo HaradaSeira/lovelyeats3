@@ -13,5 +13,7 @@
   </div>
   <%= f.submit '変更' %>
  <% end %>
-<%= link_to '戻る', user_dashboard_path %>
-<h2><%= @shop.name %> のイベント一覧</h2>
+ 
+ <%= render 'events/index' %> <!-- イベント一覧を表示 -->
+ 
+ <%= link_to '戻る', user_dashboard_path %>

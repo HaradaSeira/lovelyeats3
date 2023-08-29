@@ -24,7 +24,7 @@ class ShopsController < ApplicationController
     render :edit
   end
   end
-
+  
   private
 
   def shop_params

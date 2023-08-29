@@ -53,6 +53,7 @@ gem 'bootstrap-sass' # bootstrapの追加
 gem 'cancancan' #権限管理をするGem
 gem 'rails_admin' #管理画面を作るGem
 gem 'carrierwave' #画像投稿機能のGem
+gem 'faker' #ダミーデータ生成のGem
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

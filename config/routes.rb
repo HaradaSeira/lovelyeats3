@@ -15,7 +15,7 @@ Rails.application.routes.draw do
    end
  end
 
-  resources :shops, only: [:create] do
+  resources :shops, only: [:create, :show, :update] do
   # Add a route for showing a specific shop's details
   get :show, on: :member
  end

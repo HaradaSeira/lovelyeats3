@@ -16,6 +16,7 @@ Rails.application.routes.draw do
  end
 
   resources :shops, only: [:create, :show, :update] do
+   resources :events, only: [:new, :create]
   # Add a route for showing a specific shop's details
   get :show, on: :member
  end

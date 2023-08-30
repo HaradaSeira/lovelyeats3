@@ -14,17 +14,18 @@ class ShopsController < ApplicationController
   
   def show
     @shop = Shop.find(params[:id])
+    @events = @shop.events # イベント一覧を取得
   end
   
   def update
-  @shop = Shop.find(params[:id])
-  if @shop.update(shop_params)
-    redirect_to shop_path(@shop), notice: 'おみせの情報が更新されました。'
-  else
-    render :edit
+    @shop = Shop.find(params[:id])
+    if @shop.update(shop_params)
+      redirect_to shop_path(@shop), notice: 'おみせの情報が更新されました。'
+    else
+      render :edit
+    end
   end
-  end
-
+  
   private
 
   def shop_params

@@ -1,0 +1,9 @@
+<%= form_with(model: @event, url: shop_events_path(current_user), method: :post) do |form| %>
+  <!-- 他のフォームフィールド -->
+
+  <!-- 日付ピッカーを適用するフォームフィールド -->
+  <%= form.label :opened_at %>
+  <%= form.text_field :opened_at, class: "datepicker" %>
+
+  <%= form.submit '登録する' %>
+<% end %>

@@ -118,6 +118,8 @@ GEM
     faker (3.2.1)
       i18n (>= 1.8.11, < 2)
     ffi (1.15.5)
+    flatpickr_rails (1.1.0)
+      railties (>= 3.0)
     globalid (1.1.0)
       activesupport (>= 5.0)
     i18n (1.14.1)
@@ -284,6 +286,7 @@ DEPENDENCIES
   debug
   devise
   faker
+  flatpickr_rails
   importmap-rails
   jbuilder
   mysql2 (~> 0.5)

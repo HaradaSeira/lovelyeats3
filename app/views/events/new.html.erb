@@ -1,0 +1,17 @@
+<h2>新規イベント登録</h2>
+
+<%= form_with(model: @event, url: shop_events_path(current_user), method: :post) do |form| %>
+  <%= form.label :opened_at %>
+  <%= form.text_field :opened_at %>
+  <%= form.label :closed_at %>
+  <%= form.text_field :closed_at %>
+  <%= form.label :location_id %>
+  <%= form.text_field :location_id %>
+  <%= form.label :address %>
+  <%= form.text_area :address %>
+  
+  <%= form.label :shop_id, 'Shop' %>
+  <%= form.collection_select :shop_id, Shop.all, :id, :name %>
+  
+  <%= form.submit '登録する' %>
+<% end %>

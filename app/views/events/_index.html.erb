@@ -1,3 +1,17 @@
 <h2><%= @shop.name %> のイベント一覧</h2>
- 
-<h3><%= link_to '新しいイベントを追加する', '#' %></h3>
+ <% if @events.any? %>
+  <ul>
+    <% @events.each do |event| %>
+      <li>
+        <strong>開始日時:</strong> <%= event.opened_at %><br>
+        <strong>終了日時:</strong> <%= event.closed_at %><br>
+        <strong>場所:</strong> <%= event.location_id %><br>
+        <strong>住所:</strong> <%= event.address %><br>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>イベントは登録されていません</p>
+<% end %>
+
+<h3><%= link_to '新しいイベントを追加する', new_shop_event_path(@shop) %></h3>

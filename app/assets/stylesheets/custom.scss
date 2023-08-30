@@ -30,3 +30,17 @@ header {
 li{
   list-style:none;
 }
+
+.shop-card {
+  width: 400px; /* カードの幅 */
+  height: auto; /* 高さはコンテンツに合わせて自動調整 */
+  margin: 10px; /* カードの周囲のマージン */
+  padding: 20px; /* カード内部のパディング */
+  background-color: #ffffff; /* カードの背景色 */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* 影の効果 */
+}
+
+.shop-card-header {
+  display: flex;
+  align-items: center;
+}

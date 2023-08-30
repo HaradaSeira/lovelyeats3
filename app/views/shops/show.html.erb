@@ -1,8 +1,10 @@
-<h2><%= @shop.name %> のダッシュボード</h2>
+<center><h2><%= @shop.name %> の確認・編集</h2>
  <%= form_for @shop, url: shop_path(@shop), method: :patch do |f| %>
-  <p><strong>おみせのなまえ:</strong> <%= f.text_field :name %></p>
-  <p><strong>おみせの説明:</strong> <%= f.text_area :description %></p>
-  <p><strong>おみせのアイコン:</strong></p>
+  <p><strong>おみせのなまえ</strong>
+   <br><%= f.text_field :name %></p>
+  <p><strong>おみせの説明</strong>
+   <br><%= f.text_area :description %></p>
+  <p><strong>おみせのアイコン</strong></p>
   <div class="shop-img">
     <% if @shop.image.present? %>
       <%= image_tag @shop.image.url, class: "shop-img" %>
@@ -11,9 +13,10 @@
     <% end %>
     <%= f.file_field :image %>
   </div>
-  <%= f.submit '変更' %>
+  <%= f.submit 'おみせ情報を更新する' %>
  <% end %>
  
  <%= render 'events/index' %> <!-- イベント一覧を表示 -->
  
  <%= link_to '戻る', user_dashboard_path %>
+</center>

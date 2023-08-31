@@ -1,4 +1,6 @@
-<h2>新規イベント登録</h2>
+<div class="container">
+ <%= render 'shared/side_nav' %>
+  <h2>新規イベント登録</h2>
 
 <%= form_with(model: @event, url: shop_events_path(current_user), method: :post) do |form| %>
   <%= form.label :opened_at %>
@@ -15,3 +17,4 @@
   
   <%= form.submit '登録する' %>
 <% end %>
+</div>

@@ -1,4 +1,6 @@
-<%= form_with(model: @event, url: shop_events_path(current_user), method: :post) do |form| %>
+<div class="container">
+ <%= render 'shared/side_nav' %>
+ 　<%= form_with(model: @event, url: shop_events_path(current_user), method: :post) do |form| %>
   <!-- 他のフォームフィールド -->
 
   <!-- 日付ピッカーを適用するフォームフィールド -->
@@ -7,3 +9,4 @@
 
   <%= form.submit '登録する' %>
 <% end %>
+</div>

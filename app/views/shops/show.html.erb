@@ -1,4 +1,5 @@
-<center>
+<div class="container">
+ <%= render 'shared/side_nav' %><center>
   <h2><%= @shop.name %> の確認・編集</h2>
   <%= form_for @shop, url: shop_path(@shop), method: :patch do |f| %>
     <p><strong>おみせのなまえ</strong><br><%= f.text_field :name %></p>
@@ -21,3 +22,4 @@
  
   <%= link_to '戻る', user_dashboard_path %>
 </center>
+</div>

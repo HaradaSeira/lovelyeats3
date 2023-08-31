@@ -1,15 +1,20 @@
-<h2>新規おみせ登録</h2>
-
-<%= form_with(model: @shop, url: user_shop_create_user_path(current_user), method: :post) do |form| %>
-  <%= form.label :name %>
-  <%= form.text_field :name %>
-
-  <%= form.label :description %>
-  <%= form.text_area :description %>
-
-  <%= form.label :image %>
-  <%= form.file_field :image %>
-
+<div class="container">
+ <%= render 'shared/side_nav' %>
+  <center>
+   <h2>新規おみせ登録</h2>
+    <ul>
+      <%= form_with(model: @shop, url: user_shop_create_user_path(current_user), method: :post) do |form| %>
+    <li><%= form.label :おみせのなまえ %>
+    <%= form.text_field :name %></li>
+  
+    <li><%= form.label :description %></li>
+    <li><%= form.text_area :description %></li>
+  
+    <li><%= form.label :image %>
+    <%= form.file_field :image %></li>
+  </ul>
   <%= form.submit '登録する' %>
 <% end %>
 <%= link_to '戻る', user_dashboard_path %>
+</center>
+</div>

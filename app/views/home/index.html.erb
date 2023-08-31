@@ -1,40 +1,43 @@
-<div class="side-nav">
-              <span class="login-links">
-                <% if user_signed_in? %>
-                  <%= link_to 'おみせ一覧', user_dashboard_path(current_user) %> |
-                  <%= link_to 'TOPページ', '#' %> |
-                  <%= form_tag destroy_user_session_path, method: :delete do %>
-                    <%= submit_tag 'ログアウト' %>
-                  <% end %>
-                <% else %>
-                  <%= link_to 'ユーザーアカウント作成', new_user_registration_path %> |
-                  <%= link_to 'ユーザーログイン', '#' %> |
-                  <%= link_to '出店者ログイン', user_session_path %> |
-                  <%= link_to '新規出店希望者はこちら', '#' %>|
-                  <%= link_to '管理者限定ログイン', rails_admin_path %>
-                <% end %>
-              </span>
-            </div>
+<div class="container">
+  <div class="left-contents">
+    <span class="login-links">
+      <ul><% if user_signed_in? %>
+        <li><%= link_to 'おみせ一覧', user_dashboard_path(current_user) %> </li>
+        <li><%= link_to 'TOPページ', '#' %> </li>
+        <li><%= form_tag destroy_user_session_path, method: :delete do %></li>
+        <%= submit_tag 'ログアウト' %></li>
+      <% end %>
+      <% else %>
+        <li><%= link_to 'ユーザーアカウント作成', new_user_registration_path %> </li>
+        <li><%= link_to 'ユーザーログイン', '#' %> </li>
+        <li><%= link_to '出店者ログイン', user_session_path %> </li>
+        <li><%= link_to '新規出店希望者はこちら', '#' %>
+        <li><%= link_to '管理者限定ログイン', rails_admin_path %> </li>
+      <% end %>
+     </ul>
+    </span>
+  </div>
             
-            <div class="container">
-  <div class="row">
+  <div class="right-contents">         
+   <div class="row">
     <div class="col-md-6">
       <!-- 検索バー1 -->
       <div class="input-group mb-3">
         <input type="text" class="form-control" placeholder="キャンパスで絞り込む">
-        <div class="input-group-append">
+         <div class="input-group-append">
           <button class="btn btn-primary" type="button">検索</button>
-        </div>
+         </div>
       </div>
     </div>
-    <div class="col-md-6">
-      <!-- 検索バー2 -->
-      <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="日付で絞り込む">
-        <div class="input-group-append">
-          <button class="btn btn-primary" type="button">検索</button>
-        </div>
+   <div class="col-md-6">
+    <!-- 検索バー2 -->
+     <div class="input-group mb-3">
+      <input type="text" class="form-control" placeholder="日付で絞り込む">
+       <div class="input-group-append">
+        <button class="btn btn-primary" type="button">検索</button>
+       </div>
       </div>
     </div>
   </div>
+ </div>
 </div>

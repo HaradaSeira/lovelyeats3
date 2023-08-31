@@ -3,9 +3,20 @@ header {
 }
 
 .container {
-  max-width: 1200px; 
+  max-width: 1000px; 
   margin: 10 auto;
   padding: 20px;
+}
+
+.left-contents {
+  width: 300px;
+  margin-right: 20px;
+  float: left;
+}
+
+.right-contents {
+  width: 600px;
+  float: left;
 }
 
 .header-title-area {
@@ -22,12 +33,7 @@ header {
   height: auto; 
 }
 
-.side-nav {
-  background-color:#ff838b;
-  width:400px;
-  height:auto;
-  text-align:center;
-} 
+
 
 .shop-img {
   width: 50px;

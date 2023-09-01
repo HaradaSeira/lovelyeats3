@@ -1,4 +1,5 @@
-<h2><%= @shop.name %> のイベント一覧</h2>
+<div class="container">
+ <h2><%= @shop.name %> のイベント一覧</h2>
 <h3><%= link_to '＋新しいイベントを追加する', new_shop_event_path(@shop) %></h3>
  <% if @events.any? %>
   <ul>
@@ -12,4 +13,4 @@
 <% else %>
   <p>イベントは登録されていません</p>
 <% end %>
-
+</div>

@@ -1,0 +1,18 @@
+<div class="side-nav">
+    <span class="login-links">
+      <ul><% if user_signed_in? %>
+        <li><%= link_to 'おみせ一覧', user_dashboard_path(current_user) %> </li>
+        <li><%= link_to 'TOPページ', '#' %> </li>
+        <li><%= form_tag destroy_user_session_path, method: :delete do %></li>
+        <%= submit_tag 'ログアウト' %></li>
+      <% end %>
+      <% else %>
+        <li><%= link_to 'ユーザーアカウント作成', new_user_registration_path %> </li>
+        <li><%= link_to 'ユーザーログイン', '#' %> </li>
+        <li><%= link_to '出店者ログイン', user_session_path %> </li>
+        <li><%= link_to '新規出店希望者はこちら', '#' %>
+        <li><%= link_to '管理者限定ログイン', rails_admin_path %> </li>
+      <% end %>
+     </ul>
+    </span>
+</div>

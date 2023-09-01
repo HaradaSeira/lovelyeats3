@@ -2,7 +2,7 @@
     <span class="login-links">
       <ul><% if user_signed_in? %>
         <li><%= link_to 'おみせ一覧', user_dashboard_path(current_user) %> </li>
-        <li><%= link_to 'TOPページ',"#" </li>
+        <li><%= link_to 'TOPページ',"#" %> </li>
         <li><%= form_tag destroy_user_session_path, method: :delete do %></li>
         <%= submit_tag 'ログアウト' %></li>
       <% end %>

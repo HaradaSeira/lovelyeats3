@@ -1,20 +1,30 @@
 <div class="container">
- <%= render 'shared/side_nav' %>
+  <%= render 'shared/side_nav' %>
+  <center>
+   
   <h2>新規イベント登録</h2>
-
-<%= form_with(model: @event, url: shop_events_path(current_user), method: :post) do |form| %>
-  <%= form.label :opened_at %>
-  <%= form.text_field :opened_at %>
-  <%= form.label :closed_at %>
-  <%= form.text_field :closed_at %>
-  <%= form.label :location_id %>
-  <%= form.text_field :location_id %>
-  <%= form.label :address %>
-  <%= form.text_area :address %>
-  
-  <%= form.label :shop_id, 'Shop' %>
-  <%= form.collection_select :shop_id, Shop.all, :id, :name %>
-  
-  <%= form.submit '登録する' %>
-<% end %>
+　<ul>
+  <li><%= form_with(model: @event, url: shop_events_path(current_user), method: :post) do |form| %>
+    <%= form.label :event_date, 'イベント日' %>
+    <%= form.date_select :event_date %></li>
+    
+    <li><%= form.label :start_time, '開始時間' %>
+    <%= form.time_select :start_time %></li>
+    
+    <li><%= form.label :end_time, '終了時間' %>
+    <%= form.time_select :end_time %></li>
+    
+    <li><%= form.label :location_id, '場所' %>
+    <%= select_tag 'location_id', options_for_select(@locations.map { |location| [location.name, location.id] }), class: 'form-control', prompt: '出店するキャンパスを選ぶ' %></li>
+    
+    <li><%= form.label :address %>
+    <%= form.text_area :address %></li>
+    
+    <li><%= form.label :shop_id, 'Shop' %>
+    <%= form.collection_select :shop_id, Shop.all, :id, :name %></li>
+    
+ </ul>
+    <%= form.submit '登録する' %>
+  <% end %>
+  </center>
 </div>

@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
   def new
     @event = Event.new
+    @locations = Location.all 
   end
   
   def create
@@ -16,6 +17,13 @@ class EventsController < ApplicationController
   private
   
   def event_params
-    params.require(:event).permit(:opened_at, :closed_at, :location_id, :address, :shop_id)
+    params.require(:event).permit(
+    :event_date,
+    :start_time,
+    :end_time,
+    :location_id,
+    :address,
+    :shop_id
+  )
   end
 end

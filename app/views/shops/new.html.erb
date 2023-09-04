@@ -1,20 +1,37 @@
 <div class="container">
- <%= render 'shared/side_nav' %>
-  <center>
-   <h2>新規おみせ登録</h2>
-    <ul>
-      <%= form_with(model: @shop, url: user_shop_create_user_path(current_user), method: :post) do |form| %>
-    <li><%= form.label :おみせのなまえ %>
-    <%= form.text_field :name %></li>
+  <%= render 'shared/side_nav' %>
   
-    <li><%= form.label :description %></li>
-    <li><%= form.text_area :description %></li>
-  
-    <li><%= form.label :image %>
-    <%= form.file_field :image %></li>
-  </ul>
-  <%= form.submit '登録する' %>
-<% end %>
-<%= link_to '戻る', user_dashboard_path %>
-</center>
+    <div class="row">
+      <div class="col-md-3">
+        <!-- Side Navigation -->
+      </div>
+    <div class="right-contents"> 
+      <div class="col-md-9">
+        <center>
+          <h2>新規おみせ登録</h2>
+          <ul>
+            <%= form_with(model: @shop, url: user_shop_create_user_path(current_user), method: :post, html: { class: 'form' }) do |form| %>
+              <li class="form-group">
+                <%= form.label :おみせのなまえ %>
+                <%= form.text_field :name, class: 'form-control' %>
+              </li>
+            
+              <li class="form-group">
+                <%= form.label :おみせのせつめい %>
+                <%= form.text_area :description, class: 'form-control' %>
+              </li>
+            
+              <li class="form-group">
+                <%= form.label :おみせのアイコン %>
+                <%= form.file_field :image, class: 'form-control' %>
+              </li>
+            </ul>
+            <%= form.submit '登録する', class: 'btn btn-primary' %>
+          <% end %>
+          <br>
+          <%= link_to '戻る', user_dashboard_path, class: 'btn btn-secondary' %>
+        </center>
+      </div>
+    </div>
+  </div>
 </div>

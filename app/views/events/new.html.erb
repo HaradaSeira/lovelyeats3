@@ -3,25 +3,24 @@
   <h2>新規イベント登録</h2>
 
   <%= form_with(model: @event, url: shop_events_path(current_user), method: :post) do |form| %>
-    <%= form.label :opened_at_date %>
-    <%= form.date_field :opened_at_date, format: '%Y-%m-%d' %>
-    <%= form.label :opened_at_time %>
-    <%= form.time_field :opened_at_time %>
+    <%= form.label :event_date, 'イベント日' %>
+    <%= form.date_select :event_date %>
     
-    <%= form.label :closed_at_date %>
-    <%= form.date_field :closed_at_date, format: '%Y-%m-%d' %>
-    <%= form.label :closed_at_time %>
-    <%= form.time_field :closed_at_time %>
-
-    <%= form.label :location_id %>
+    <%= form.label :start_time, '開始時間' %>
+    <%= form.time_select :start_time %>
+    
+    <%= form.label :end_time, '終了時間' %>
+    <%= form.time_select :end_time %>
+    
+    <%= form.label :location_id, '場所' %>
     <%= select_tag 'location_id', options_for_select(@locations.map { |location| [location.name, location.id] }), class: 'form-control', prompt: '出店するキャンパスを選ぶ' %>
-
+    
     <%= form.label :address %>
     <%= form.text_area :address %>
-
+    
     <%= form.label :shop_id, 'Shop' %>
     <%= form.collection_select :shop_id, Shop.all, :id, :name %>
-
+   
     <%= form.submit '登録する' %>
   <% end %>
 </div>

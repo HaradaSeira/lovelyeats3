@@ -8,4 +8,20 @@ class User < ApplicationRecord
  
  has_many :shops
  
+ 
+ serialize :roles, Array
+
+  def add_role(role)
+    self.roles ||= []
+    self.roles << role unless self.roles.include?(role)
+  end
+
+  def remove_role(role)
+    self.roles -= [role]
+  end
+
+  def has_role?(role)
+    self.roles.include?(role)
+  end
+  
 end

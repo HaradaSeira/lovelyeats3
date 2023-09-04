@@ -24,7 +24,29 @@
     </div>
   </div>
 </div>
-
+</div>
+    <% if @events.any? %>
+      <ul class="list-group">
+        <% @events.each do |event| %>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-6">
+                <strong>開始日時:</strong> <%= event.opened_at %><br>
+                <strong>終了日時:</strong> <%= event.closed_at %><br>
+              </div>
+              <div class="col-md-6">
+                <strong>場所:</strong> <%= event.location_id %><br>
+                <strong>住所:</strong> <%= event.address %><br>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>イベントは登録されていません</p>
+    <% end %>
+  </div>
+</div>
 <script>
   flatpickr("#datepicker", {
     mode: "range", // 日付の範囲を選択

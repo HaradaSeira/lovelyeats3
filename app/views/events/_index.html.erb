@@ -15,6 +15,8 @@
                 <div class="col-md-6">
                   <strong>場所:</strong> <%= event.location_id %><br>
                   <strong>住所:</strong> <%= event.address %><br>
+                  <%= link_to 'イベント詳細', shop_event_path(@shop, event), class: 'btn btn-info' %>
+            
                 </div>
               </div>
             </li>

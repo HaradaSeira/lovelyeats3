@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_01_094602) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_01_075310) do
+
   create_table "events", charset: "utf8mb4", force: :cascade do |t|
     t.datetime "opened_at"
     t.datetime "closed_at"

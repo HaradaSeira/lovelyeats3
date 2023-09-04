@@ -1,0 +1,30 @@
+<div class="container">
+   <%= render 'shared/side_nav' %>
+   <div class="right-contents"> 
+     <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header">
+            <h2><%= @event.shop.name %> のイベント詳細</h2>
+          </div>
+          <div class="card-body">
+            <p><strong>おみせのなまえ:</strong> <%= @event.shop.name %></p>
+            <p><strong>おみせのせつめい:</strong> <%= @event.shop.description %></p>
+            <p><strong>場所:</strong> <%= @event.location %></p>
+            <p><strong>開始日時:</strong> <%= @event.opened_at %></p>
+            <p><strong>終了日時:</strong> <%= @event.closed_at %></p>
+  
+            <% if @event.shop.image.present? %>
+              <div class="shop-image">
+                <%= image_tag @event.shop.image.url, class: "img-thumbnail" %>
+              </div>
+            <% end %>
+          </div>
+          <div class="card-footer">
+            <%= link_to '戻る', user_dashboard_path, class: 'btn btn-secondary' %>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+</div>

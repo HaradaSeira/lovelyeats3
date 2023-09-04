@@ -10,9 +10,10 @@ class Ability
       can :access, :rails_admin
     # 全ての機能を使えるように設定
       can :manage, :all# Define abilities for the user here. For example:
-    #
+    
+   elsif user.has_role?(:customer)
+      can :read, :all # customerユーザーには読み取り操作を許可
     #   return unless user.present?
-    #   can :read, :all
     #   return unless user.admin?
     #   can :manage, :all
     #

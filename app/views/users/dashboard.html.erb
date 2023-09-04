@@ -1,29 +1,34 @@
 <div class="container">
- <%= render 'shared/side_nav' %>
-  <center>
-  <h2><%= current_user.email %> さんのおみせ一覧</h2>
-   <h3><%= link_to '＋新しいおみせを追加する', user_shop_new_user_path(current_user) %></h3>
-
-    <% if @shops.any? %>
-    <ul class="shop-list">
-     <% @shops.each do |shop| %>
-      <div class="shop-card">
-       <div class="shop-card-header">
-        <% if shop.image.present? %>
-         <%= image_tag shop.image.url, class: "shop-img" %>
-        <% else %>
-         <%= image_tag 'store.jpg', alt: 'デフォルト画像', class: "shop-img" %>
-        <% end %>
-          <h3><%= link_to shop.name, shop_path(shop) %></h3>
-       </div>
-      </div>
-    <% end %>
-     </ul>
-    <% else %>
-     <p>おみせは登録されていません</p>
-    <% end %>
-
-  <%= link_to '戻る', user_dashboard_path %>
- </center>
+  <%= render 'shared/side_nav' %>
+  <div class="right-contents">
+    <center>
+     <h2><%= current_user.email %> さんのおみせ一覧</h2>
+     <h3><%= link_to '＋新しいおみせを追加する', user_shop_new_user_path(current_user), class: 'btn btn-primary' %></h3>
+ 
+     <% if @shops.any? %>
+       <ul class="list-group shop-list">
+         <% @shops.each do |shop| %>
+           <li class="list-group-item">
+             <div class="row">
+               <div class="col-md-3">
+                 <% if shop.image.present? %>
+                   <%= image_tag shop.image.url, class: "shop-img img-thumbnail" %>
+                 <% else %>
+                   <%= image_tag 'store.jpg', alt: 'デフォルト画像', class: "shop-img img-thumbnail" %>
+                 <% end %>
+               </div>
+               <div class="col-md-9">
+                 <h3><%= link_to shop.name, shop_path(shop) %></h3>
+               </div>
+             </div>
+           </li>
+         <% end %>
+       </ul>
+     <% else %>
+       <p>おみせは登録されていません</p>
+     <% end %>
+ 
+     <%= link_to '戻る', user_dashboard_path %>
+   </center>
+ </div>
 </div>
-

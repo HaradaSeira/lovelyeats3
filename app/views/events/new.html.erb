@@ -20,7 +20,7 @@
     
     <%= form.label :shop_id, 'Shop' %>
     <%= form.collection_select :shop_id, Shop.all, :id, :name %>
-    
+   
     <%= form.submit '登録する' %>
   <% end %>
 </div>

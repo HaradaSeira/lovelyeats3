@@ -16,12 +16,11 @@ Rails.application.routes.draw do
  end
 
   resources :shops, only: [:create, :show, :update, :destroy] do
-   resources :events, only: [:new, :create]
+  resources :events, only: [:new, :create]
   # Add a route for showing a specific shop's details
-  get :show, on: :member
  end
  
- resources :shops do
+  resources :shops do
   resources :events
  end
 end

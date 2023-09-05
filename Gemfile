@@ -55,7 +55,6 @@ gem 'rails_admin' #管理画面を作るGem
 gem 'carrierwave' #画像投稿機能のGem
 gem 'faker' #ダミーデータ生成のGem
 gem 'flatpickr_rails' #日付取得のgem
-
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]

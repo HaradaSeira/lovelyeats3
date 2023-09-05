@@ -26,10 +26,10 @@ class ShopsController < ApplicationController
     end
   end
   
-  def destroy
-    @shop = Shop.find(params[:id])
-    @shop.destroy
-    redirect_to user_dashboard_path, notice: 'おみせを削除しました。'
+  def destroy 
+    shop = Shop.find(params[:id])
+    shop.destroy
+    redirect_to user_dashboard_path, notice: 'おみせを削除しました。', status: :see_other
   end
   
   private

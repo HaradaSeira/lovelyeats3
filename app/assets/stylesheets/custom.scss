@@ -36,6 +36,11 @@ header {
 
 
 .shop-img {
+  width: 200px;
+  height: auto; 
+}
+
+.shop-img-home {
   width: 50px;
   height: auto; 
 }
@@ -56,4 +61,21 @@ li{
 .shop-card-header {
   display: flex;
   align-items: center;
+}
+
+.img-thumbnail-home {
+  width: 60px;
+  height: auto;
+  float: left;
+ }
+
+.card-body-home {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-body img {
+  max-width: 100px; /* 画像の幅を調整 */
+  height: auto;
 }

@@ -18,7 +18,10 @@
               <div class="shop-image">
                 <%= image_tag @event.shop.image.url, class: "img-thumbnail" %>
               </div>
-            <% end %>
+              <% else %>
+              <div class="shop-image">
+              <%= image_tag 'store.jpg', alt: 'デフォルト画像', class: "img-thumbnail" %>
+              <% end %>
           </div>
           <div class="card-footer">
             <%= link_to '戻る', user_dashboard_path, class: 'btn btn-secondary' %>

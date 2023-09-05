@@ -5,6 +5,7 @@
         <li><%= link_to 'TOPページ',"#" %></li>
         <li><%= form_tag destroy_user_session_path, method: :delete do %></li>
         <%= submit_tag 'ログアウト' %></li>
+   
       <% end %>
       <% else %>
         <li><%= link_to 'ユーザーアカウント作成', new_user_registration_path %> </li>

@@ -29,17 +29,23 @@
       <ul class="list-group">
         <% @events.each do |event| %>
           <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-6">
-                <strong>開始日時:</strong> <%= event.opened_at %><br>
-                <strong>終了日時:</strong> <%= event.closed_at %><br>
-              </div>
-              <div class="col-md-6">
-                <strong>場所:</strong> <%= event.location_id %><br>
-                <strong>住所:</strong> <%= event.address %><br>
-              </div>
-            </div>
-          </li>
+
+  <div class="card-body-home">
+    <p><strong> <%= event.shop.name %></p> </strong>
+    <p><strong>  <%= event.location %></p> </strong>
+    <p><strong> <%= event.opened_at %>～<%= event.closed_at %></p></strong>
+
+    <% if event.shop.image.present? %>
+      <div class="shop-image-home">
+        <%= image_tag event.shop.image.url, class: "img-thumbnail-home" %>
+      </div>
+    <% else %>
+      <div class="shop-image-home">
+        <%= image_tag 'store.jpg', alt: 'デフォルト画像', class: "img-thumbnail-home" %>
+    <% end %>
+
+  </div>
+</li>
         <% end %>
       </ul>
     <% else %>

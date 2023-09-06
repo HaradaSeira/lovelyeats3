@@ -10,18 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_01_075310) do
-
+ActiveRecord::Schema[7.0].define(version: 2023_09_06_013622) do
   create_table "events", charset: "utf8mb4", force: :cascade do |t|
     t.datetime "opened_at"
     t.datetime "closed_at"
-    t.bigint "shop_id", null: false
-    t.bigint "location_id", null: false
+    t.integer "shop_id"
+    t.integer "location_id"
     t.string "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["location_id"], name: "index_events_on_location_id"
-    t.index ["shop_id"], name: "index_events_on_shop_id"
   end
 
   create_table "items", charset: "utf8mb4", force: :cascade do |t|
@@ -65,8 +62,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_01_075310) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "events", "locations"
-  add_foreign_key "events", "shops"
   add_foreign_key "items", "shops"
   add_foreign_key "shops", "users"
 end

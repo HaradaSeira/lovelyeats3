@@ -1,69 +1,44 @@
 <div class="container">
   <%= render 'shared/side_nav' %>
-  <div class="right-contents">  
+  <div class="right-contents">
     <h2>新規イベント登録</h2>
 
     <%= form_with(model: @event, url: shop_events_path(current_user), method: :post) do |form| %>
       <div class="form-group">
-        <%= form.label :event_date, 'イベント日' %>
-        <%= form.date_field :event_date, class: 'form-control' %>
+        <%= form.label :opened_at, 'イベント開始日時' %>
+        <%= form.datetime_local_field :opened_at, class: 'form-control' %>
         <!-- エラーメッセージの表示 -->
-        <% if @event.errors[:event_date].any? %>
+        <% if @event.errors[:opened_at].any? %>
           <div class="text-danger">
-            <%= @event.errors[:event_date].join(', ') %>
+            <%= @event.errors[:opened_at].join(', ') %>
           </div>
         <% end %>
       </div>
-
+      
       <div class="form-group">
-        <%= form.label :start_time, '開始時間' %>
-        <%= form.time_field :start_time, class: 'form-control' %>
+        <%= form.label :closed_at, 'イベント終了日時' %>
+        <%= form.datetime_local_field :closed_at, class: 'form-control' %>
         <!-- エラーメッセージの表示 -->
-        <% if @event.errors[:start_time].any? %>
+        <% if @event.errors[:closed_at].any? %>
           <div class="text-danger">
-            <%= @event.errors[:start_time].join(', ') %>
-          </div>
-        <% end %>
-      </div>
-
-      <div class="form-group">
-        <%= form.label :end_time, '終了時間' %>
-        <%= form.time_field :end_time, class: 'form-control' %>
-        <!-- エラーメッセージの表示 -->
-        <% if @event.errors[:end_time].any? %>
-          <div class="text-danger">
-            <%= @event.errors[:end_time].join(', ') %>
+            <%= @event.errors[:closed_at].join(', ') %>
           </div>
         <% end %>
       </div>
 
       <div class="form-group">
         <%= form.label :location_id, 'キャンパス' %>
-        <%= select_tag 'location_id', options_for_select(@locations.map { |location| [location.name, location.id] }), class: 'form-control', prompt: '出店するキャンパスを選ぶ' %>
+        <%= form.collection_select :location_id, @locations, :id, :name, { prompt: '出店するキャンパスを選ぶ' }, class: 'form-control' %>
       </div>
 
       <div class="form-group">
         <%= form.label :address, '場所（例：「本部棟2階エントランス」など）' %>
         <%= form.text_area :address, class: 'form-control' %>
-        <!-- エラーメッセージの表示 -->
-        <% if @event.errors[:address].any? %>
-          <div class="text-danger">
-            <%= @event.errors[:address].join(', ') %>
-          </div>
-        <% end %>
       </div>
 
       <div class="form-group">
         <%= form.label :shop_id, 'Shop' %>
-        <%= select_tag 'event[shop_id]', options_from_collection_for_select(Shop.all, :id, :name, @event.shop_id), { prompt: 'ショップを選択', class: 'form-control' } %>
-
-
-        <!-- エラーメッセージの表示 -->
-        <% if @event.errors[:shop_id].any? %>
-          <div class="text-danger">
-            <%= @event.errors[:shop_id].join(', ') %>
-          </div>
-        <% end %>
+        <%= form.collection_select :shop_id, Shop.all, :id, :name, { prompt: 'ショップを選択' }, class: 'form-control' %>
       </div>
 
       <%= form.submit '登録する', class: 'btn btn-primary' %>

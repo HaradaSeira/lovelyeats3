@@ -32,7 +32,7 @@
 
   <div class="card-body-home">
     <p><strong> <%= event.shop.name %></p> </strong>
-    <p><strong>  <%= event.location %></p> </strong>
+    <p><strong>  <%= event.location.name %></p> </strong>
     <p><strong> <%= l event.opened_at %> ～ <%= l event.closed_at %></p></strong>
 
     <% if event.shop.image.present? %>

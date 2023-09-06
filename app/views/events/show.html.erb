@@ -5,14 +5,15 @@
       <div class="col-md-8">
         <div class="card">
           <div class="card-header">
-            <h2><%= @event.shop.name %> のイベント詳細</h2>
+            <h2><%= @event.shop.name %>の<%= I18n.with_locale(:ja) { @event.opened_at.strftime('%Y年%-m月%-d日（%a）') } %>のイベント詳細</h2>
           </div>
           <div class="card-body">
             <p><strong>おみせのなまえ:</strong> <%= @event.shop.name %></p>
             <p><strong>おみせのせつめい:</strong> <%= @event.shop.description %></p>
             <p><strong>場所:</strong> <%= @event.location.name %></p>
-            <p><strong>開始日時:</strong> <%= l @event.opened_at %></p>
-            <p><strong>終了日時:</strong> <%= l @event.closed_at %></p>
+            <p><strong>開催日:<%= I18n.with_locale(:ja) { @event.opened_at.strftime('%Y年%-m月%-d日（%a）') } %>
+            <p><strong>開店時間:</strong> <%= @event.opened_at.strftime('%-H時%M分') %></p>
+            <p><strong>閉店時間:</strong> <%= @event.closed_at.strftime('%-H時%M分') %></p>
   
             <% if @event.shop.image.present? %>
               <div class="shop-image">

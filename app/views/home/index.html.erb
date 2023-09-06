@@ -33,7 +33,7 @@
   <div class="card-body-home">
     <p><strong> <%= event.shop.name %></p> </strong>
     <p><strong>  <%= event.location %></p> </strong>
-    <p><strong> <%= event.opened_at %>～<%= event.closed_at %></p></strong>
+    <p><strong> <%= l event.opened_at %> ～ <%= l event.closed_at %></p></strong>
 
     <% if event.shop.image.present? %>
       <div class="shop-image-home">

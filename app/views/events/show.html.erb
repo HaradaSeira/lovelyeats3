@@ -11,8 +11,8 @@
             <p><strong>おみせのなまえ:</strong> <%= @event.shop.name %></p>
             <p><strong>おみせのせつめい:</strong> <%= @event.shop.description %></p>
             <p><strong>場所:</strong> <%= @event.location %></p>
-            <p><strong>開始日時:</strong> <%= @event.opened_at %></p>
-            <p><strong>終了日時:</strong> <%= @event.closed_at %></p>
+            <p><strong>開始日時:</strong> <%= l @event.opened_at %></p>
+            <p><strong>終了日時:</strong> <%= l @event.closed_at %></p>
   
             <% if @event.shop.image.present? %>
               <div class="shop-image">

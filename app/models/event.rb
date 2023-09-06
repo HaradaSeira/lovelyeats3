@@ -1,6 +1,7 @@
 class Event < ApplicationRecord
   belongs_to :shop
   belongs_to :location
+  has_many :items
   
    # カラム名と属性名を一致させる
   attribute :opened_at, :datetime

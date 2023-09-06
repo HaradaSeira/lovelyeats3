@@ -26,17 +26,13 @@ class EventsController < ApplicationController
 
   private
 
-   def event_params
+  def event_params
     params.require(:event).permit(
       :location_id,
       :address,
       :shop_id,
-      :event_date,
-      :start_time,
-      :end_time
-    ).tap do |whitelisted|
-      whitelisted[:opened_at] = DateTime.parse("#{whitelisted[:event_date]} #{whitelisted[:start_time]}")
-      whitelisted[:closed_at] = DateTime.parse("#{whitelisted[:event_date]} #{whitelisted[:end_time]}")
-    end
+      :opened_at,
+      :closed_at 
+    )
   end
 end

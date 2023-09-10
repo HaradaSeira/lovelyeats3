@@ -7,6 +7,7 @@ class User < ApplicationRecord
  #enum role: { general: 0, admin: 1 }
  
  has_many :shops
+ has_many :items
  
  
  serialize :roles, Array

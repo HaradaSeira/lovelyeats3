@@ -28,13 +28,33 @@
        <p>おみせは登録されていません</p>
      <% end %>
      
-     
-     <!-- メニュー一覧を表示 -->
-  <div class="row">
-    <div class="col-md-9 right-contents">
-      <%= render 'items/index' %>
-    </div>
-  </div>
+     <h2><%= current_user.email %> さんのメニュー一覧</h2>
+     <h3><%= link_to '＋新しいメニューを追加する', item_new_user_path(current_user), class: 'btn btn-primary' %></h3>
+     <% if @items.any? %>
+      <ul class="list-group">
+        <% @items.each do |item| %>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-6">
+                <h4><%= item.name %></h4>
+                <p><strong>説明:</strong> <%= item.description %></p>
+                <p><strong>価格:</strong> <%= item.price %> 円</p>
+                <!-- 他のアイテムの情報を表示 -->
+              </div>
+              <div class="col-md-6">
+                <% if item.image.present? %>
+                  <%= image_tag item.image.url, class: "item-img img-thumbnail" %>
+                <% else %>
+                  <%= image_tag 'default_item_image.jpg', alt: 'デフォルト画像', class: "item-img img-thumbnail" %>
+                <% end %>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>メニューはまだ登録されていません</p>
+    <% end %><!-- メニュー一覧を表示 -->
   
     </div>
   </div>

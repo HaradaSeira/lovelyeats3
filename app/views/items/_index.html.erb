@@ -1,9 +1,8 @@
 <div class="container">
   <div class="right-contents">
     <h2><%= @shop.name %> のメニュー一覧</h2>
-    <h3><%= link_to '＋新しいメニューを追加する', new_shop_item_path(@shop), class: 'btn btn-primary' %></h3>
-
-    <% if @items.any? %>
+    <h3><%= link_to '＋新しいメニューを追加する', '#', class: 'btn btn-primary' %></h3>
+     <% if @items.any? %>
       <ul class="list-group">
         <% @items.each do |item| %>
           <li class="list-group-item">
@@ -15,7 +14,11 @@
                 <!-- 他のアイテムの情報を表示 -->
               </div>
               <div class="col-md-6">
-                <!-- ここにアイテムの画像を表示するコードを追加 -->
+                <% if item.image.present? %>
+                  <%= image_tag item.image.url, class: "item-img img-thumbnail" %>
+                <% else %>
+                  <%= image_tag 'default_item_image.jpg', alt: 'デフォルト画像', class: "item-img img-thumbnail" %>
+                <% end %>
               </div>
             </div>
           </li>

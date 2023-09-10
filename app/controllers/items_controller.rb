@@ -1,23 +1,23 @@
 class ItemsController < ApplicationController
-  before_action :set_shop
-  before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  before_action :set_user
 
   def index
-    @items = @shop.items.all
+    @items = @user.items.all
   end
 
   def show
   end
 
   def new
-    @item = @shop.items.new
+    @item = @user.items.new
   end
 
   def create
-    @item = @shop.items.new(item_params)
+    @item = @user.items.new(item_params)
 
     if @item.save
-      redirect_to shop_item_path(@shop, @item), notice: '新メニューが作成されました。'
+      redirect_to user_item_path(@user, @item), notice: '新メニューが作成されました。'
     else
       render :new
     end
@@ -28,7 +28,7 @@ class ItemsController < ApplicationController
 
   def update
     if @item.update(item_params)
-      redirect_to shop_item_path(@shop, @item), notice: 'メニューが更新されました。'
+      redirect_to user_item_path(@user, @item), notice: 'メニューが更新されました。'
     else
       render :edit
     end
@@ -36,20 +36,8 @@ class ItemsController < ApplicationController
 
   def destroy
     @item.destroy
-    redirect_to shop_items_path(@shop), notice: 'メニューが削除されました。'
+    redirect_to user_items_path(@user), notice: 'メニューが削除されました。'
   end
 
-  private
-
-  def set_shop
-    @shop = Shop.find(params[:shop_id])
-  end
-
-  def set_item
-    @item = @shop.items.find(params[:id])
-  end
-
-  def item_params
-    params.require(:item).permit(:name, :description, :price, :image)
-  end
+  
 end

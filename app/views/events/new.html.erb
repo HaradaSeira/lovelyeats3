@@ -1,29 +1,29 @@
 <div class="container">
   <%= render 'shared/side_nav' %>
   <div class="right-contents">
-    <h2>新規イベント登録</h2>
+    <h2><%= @event.shop.name %> の新規イベント登録</h2>
 
     <%= form_with(model: @event, url: shop_events_path(current_user), method: :post) do |form| %>
+      <%= form.hidden_field :shop_id, value: @event.shop.id %>
+
       <div class="form-group">
-        <%= form.label :opened_at, 'イベント開始日時' %>
-        <%= form.datetime_local_field :opened_at, class: 'form-control' %>
-        <!-- エラーメッセージの表示 -->
-        <% if @event.errors[:opened_at].any? %>
-          <div class="text-danger">
-            <%= @event.errors[:opened_at].join(', ') %>
-          </div>
-        <% end %>
+        <%= form.label :opened_date, 'イベント開始日' %>
+        <%= form.date_field :opened_date, class: 'form-control' %>
       </div>
       
       <div class="form-group">
-        <%= form.label :closed_at, 'イベント終了日時' %>
-        <%= form.datetime_local_field :closed_at, class: 'form-control' %>
-        <!-- エラーメッセージの表示 -->
-        <% if @event.errors[:closed_at].any? %>
-          <div class="text-danger">
-            <%= @event.errors[:closed_at].join(', ') %>
-          </div>
-        <% end %>
+        <%= form.label :opened_time, 'イベント開始時間' %>
+        <%= form.time_field :opened_time, class: 'form-control' %>
+      </div>
+      
+      <div class="form-group">
+        <%= form.label :closed_date, 'イベント終了日' %>
+        <%= form.date_field :closed_date, class: 'form-control' %>
+      </div>
+      
+      <div class="form-group">
+        <%= form.label :closed_time, 'イベント終了時間' %>
+        <%= form.time_field :closed_time, class: 'form-control' %>
       </div>
 
       <div class="form-group">
@@ -34,11 +34,6 @@
       <div class="form-group">
         <%= form.label :address, '場所（例：「本部棟2階エントランス」など）' %>
         <%= form.text_area :address, class: 'form-control' %>
-      </div>
-
-      <div class="form-group">
-        <%= form.label :shop_id, 'Shop' %>
-        <%= form.collection_select :shop_id, Shop.all, :id, :name, { prompt: 'ショップを選択' }, class: 'form-control' %>
       </div>
 
       <%= form.submit '登録する', class: 'btn btn-primary' %>

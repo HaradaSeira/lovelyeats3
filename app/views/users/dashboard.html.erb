@@ -29,7 +29,7 @@
      <% end %>
      
      <h2><%= current_user.email %> さんのメニュー一覧</h2>
-     <h3><%= link_to '＋新しいメニューを追加する', item_new_user_path(current_user), class: 'btn btn-primary' %></h3>
+     <h3><%= link_to '＋新しいメニューを追加する', new_item_path, class: 'btn btn-primary' %></h3>
      <% if @items.any? %>
       <ul class="list-group">
         <% @items.each do |item| %>
@@ -45,7 +45,7 @@
                 <% if item.image.present? %>
                   <%= image_tag item.image.url, class: "item-img img-thumbnail" %>
                 <% else %>
-                  <%= image_tag 'default_item_image.jpg', alt: 'デフォルト画像', class: "item-img img-thumbnail" %>
+                  <%= image_tag 'menu.jpg', alt: 'デフォルト画像', class: "item-img img-thumbnail" %>
                 <% end %>
               </div>
             </div>

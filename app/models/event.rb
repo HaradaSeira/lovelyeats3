@@ -1,7 +1,8 @@
 class Event < ApplicationRecord
   belongs_to :shop
   belongs_to :location
-  has_many :items
+  has_many :event_items # 中間テーブル
+  has_many :items, through: :event_items  # 中間テーブル
   
    # カラム名と属性名を一致させる
   attribute :opened_at, :datetime

@@ -1,4 +1,9 @@
 class Item < ApplicationRecord
-  belongs_to :shop
-  belongs_to :events
+  mount_uploader :image, ImageUploader
+  
+  belongs_to :user
+  has_many :event_items
+  has_many :events, through: :event_items
+  has_and_belongs_to_many :shops
+  
 end

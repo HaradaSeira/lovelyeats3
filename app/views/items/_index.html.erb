@@ -1,7 +1,7 @@
 <div class="container">
   <div class="right-contents">
-    <h2><%= @shop.name %> のメニュー一覧</h2>
-    <h3><%= link_to '＋新しいメニューを追加する', '#', class: 'btn btn-primary' %></h3>
+    <h2><%= current_user.email %> のメニュー一覧</h2>
+    <h3><%= link_to '＋新しいメニューを追加する', new_item_path, class: 'btn btn-primary' %></h3>
      <% if @items.any? %>
       <ul class="list-group">
         <% @items.each do |item| %>

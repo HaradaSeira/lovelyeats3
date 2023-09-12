@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_06_013622) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_11_090434) do
+  create_table "event_items", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "event_id"
+    t.bigint "item_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_event_items_on_event_id"
+    t.index ["item_id"], name: "index_event_items_on_item_id"
+  end
+
   create_table "events", charset: "utf8mb4", force: :cascade do |t|
     t.datetime "opened_at"
     t.datetime "closed_at"
@@ -21,15 +30,35 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_06_013622) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "events_items", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "event_id"
+    t.bigint "item_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_events_items_on_event_id"
+    t.index ["item_id"], name: "index_events_items_on_item_id"
+  end
+
+  create_table "item_shop", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "item_id"
+    t.bigint "shop_id"
+    t.index ["item_id"], name: "index_item_shop_on_item_id"
+    t.index ["shop_id"], name: "index_item_shop_on_shop_id"
+  end
+
   create_table "items", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.decimal "price", precision: 10
     t.string "image"
-    t.bigint "shop_id", null: false
+    t.bigint "shop_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.bigint "event_id"
+    t.index ["event_id"], name: "index_items_on_event_id"
     t.index ["shop_id"], name: "index_items_on_shop_id"
+    t.index ["user_id"], name: "index_items_on_user_id"
   end
 
   create_table "locations", charset: "utf8mb4", force: :cascade do |t|
@@ -62,6 +91,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_06_013622) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "event_items", "events"
+  add_foreign_key "event_items", "items"
+  add_foreign_key "events_items", "events"
+  add_foreign_key "events_items", "items"
+  add_foreign_key "item_shop", "items"
+  add_foreign_key "item_shop", "shops"
+  add_foreign_key "items", "events"
   add_foreign_key "items", "shops"
+  add_foreign_key "items", "users"
   add_foreign_key "shops", "users"
 end

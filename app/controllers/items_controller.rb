@@ -19,12 +19,21 @@ class ItemsController < ApplicationController
     @item.shop_id = params[:item][:shop_id] # shop_id を設定
     
     if @item.save
-      redirect_to items_path(@item), notice: 'アイテムが作成されました。'
+      redirect_to items_path(@item), notice: 'メニューが作成されました。'
     else
       render :new
     end
   end
 
+  def destroy
+    @item = current_user.items.find(params[:id])
+    if @item.destroy
+      redirect_to items_path,  status: :see_other, notice: 'メニューが削除されました。'
+    else
+      redirect_to items_path, status: :see_other, alert: '削除に失敗しました。' 
+    end
+  end
+  
   def edit
     @item = current_user.items.find(params[:id])
   end
@@ -32,18 +41,12 @@ class ItemsController < ApplicationController
   def update
     @item = current_user.items.find(params[:id])
     if @item.update(item_params)
-      redirect_to item_path(@item), notice: 'アイテムが更新されました。'
+      redirect_to item_path(@item), notice: 'メニューが更新されました。'
     else
       render :edit
     end
   end
 
-  def destroy
-    @item = current_user.items.find(params[:id])
-    @item.destroy
-    redirect_to items_path, notice: 'アイテムが削除されました。'
-  end
-  
   private
 
   def item_params

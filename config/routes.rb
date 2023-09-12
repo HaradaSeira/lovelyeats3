@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   
   get 'user_dashboard', to: 'users#dashboard', as: :user_dashboard
   
-  resources :items, only: [:new, :create]
+  resources :items, only: [:new, :create, :edit, :update, :destroy]
   
   resources :users do
     member do

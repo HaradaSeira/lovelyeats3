@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_11_090434) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_12_062002) do
   create_table "event_items", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "event_id"
     t.bigint "item_id", null: false
@@ -39,13 +39,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_11_090434) do
     t.index ["item_id"], name: "index_events_items_on_item_id"
   end
 
-  create_table "item_shop", charset: "utf8mb4", force: :cascade do |t|
-    t.bigint "item_id"
-    t.bigint "shop_id"
-    t.index ["item_id"], name: "index_item_shop_on_item_id"
-    t.index ["shop_id"], name: "index_item_shop_on_shop_id"
-  end
-
   create_table "items", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -59,6 +52,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_11_090434) do
     t.index ["event_id"], name: "index_items_on_event_id"
     t.index ["shop_id"], name: "index_items_on_shop_id"
     t.index ["user_id"], name: "index_items_on_user_id"
+  end
+
+  create_table "items_shops", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "item_id"
+    t.bigint "shop_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_items_shops_on_item_id"
+    t.index ["shop_id"], name: "index_items_shops_on_shop_id"
   end
 
   create_table "locations", charset: "utf8mb4", force: :cascade do |t|
@@ -95,10 +97,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_11_090434) do
   add_foreign_key "event_items", "items"
   add_foreign_key "events_items", "events"
   add_foreign_key "events_items", "items"
-  add_foreign_key "item_shop", "items"
-  add_foreign_key "item_shop", "shops"
   add_foreign_key "items", "events"
   add_foreign_key "items", "shops"
   add_foreign_key "items", "users"
+  add_foreign_key "items_shops", "items"
+  add_foreign_key "items_shops", "shops"
   add_foreign_key "shops", "users"
 end

@@ -36,7 +36,7 @@
           <li class="list-group-item">
             <div class="row">
               <div class="col-md-6">
-                <h4><%= item.name %></h4>
+                <h4><%= link_to item.name, edit_item_path(item.id) %></h4>
                 <p><strong>説明:</strong> <%= item.description %></p>
                 <p><strong>価格:</strong> <%= item.price %> 円</p>
                 <!-- 他のアイテムの情報を表示 -->

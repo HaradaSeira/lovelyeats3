@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_12_062002) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_13_031641) do
   create_table "event_items", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "event_id"
     t.bigint "item_id", null: false
@@ -88,7 +88,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_12_062002) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "admin", default: false
-    t.string "role"
+    t.string "roles"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -99,7 +99,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_12_062002) do
   add_foreign_key "events_items", "items"
   add_foreign_key "items", "events"
   add_foreign_key "items", "shops"
-  add_foreign_key "items", "users"
   add_foreign_key "items_shops", "items"
   add_foreign_key "items_shops", "shops"
   add_foreign_key "shops", "users"

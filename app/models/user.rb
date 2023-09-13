@@ -11,6 +11,11 @@ class User < ApplicationRecord
  
  
  serialize :roles, Array
+ 
+  def initialize(*args)
+    super
+    self.roles ||= [] # roles を初期化する
+  end
 
   def add_role(role)
     self.roles ||= []
@@ -22,7 +27,11 @@ class User < ApplicationRecord
   end
 
   def has_role?(role)
-    self.roles.include?(role)
+    self.roles.include?(role.to_s)
+  end
+  
+  def customer?
+    role == "customer"
   end
   
 end

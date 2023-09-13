@@ -15,8 +15,6 @@ class Ability
       can :read, :all # customerユーザーには読み取り操作を許可
     #   return unless user.present?
     #   return unless user.admin?
-    #   can :manage, :all
-    #
     # The first argument to `can` is the action you are giving the user
     # permission to do.
     # If you pass :manage it will apply to every action. Other common actions

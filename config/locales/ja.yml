@@ -12,7 +12,9 @@ ja:
       - 金
       - 土
   devise:
+    failure:
     sessions:
-      signed_in: "ログインしました。"
-      signed_out: "ログアウトしました。"
-      already_authenticated: "すでにログインしています。"
+      user:
+        signed_in: "ログインしました。"
+        signed_out: "ログアウトしました。"
+        already_authenticated: "すでにログインしています。"

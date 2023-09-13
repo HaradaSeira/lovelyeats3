@@ -1,7 +1,6 @@
 <div class="container">
   <%= render 'shared/side_nav' %>
-            
-  <div class="right-contents">         
+  <div class="right-contents">
     <div class="row">
       <div class="col-md-6">
         <!-- 検索バー1 -->
@@ -21,41 +20,53 @@
           </div>
         </div>
       </div>
-      
-      
-      
     </div>
     <% if @events.any? %>
       <ul class="list-group">
         <% @events.each do |event| %>
           <li class="list-group-item">
-
-  <div class="card-body-home">
-    <p><strong> <%= event.shop.name %></p> </strong>
-    <p><strong>  <%= event.location.name %></p> </strong>
-    <p><strong> <%= l event.opened_at %> ～ <%= l event.closed_at %></p></strong>
-
-    <% if event.shop.image.present? %>
-      <div class="shop-image-home">
-        <%= image_tag event.shop.image.url, class: "img-thumbnail-home" %>
-      </div>
-    <% else %>
-      <div class="shop-image-home">
-        <%= image_tag 'store.jpg', alt: 'デフォルト画像', class: "img-thumbnail-home" %>
-    <% end %>
-
-  </div>
-</li>
+            <div class="card-body-home">
+              <p><strong><%= event.shop.name %></strong></p>
+              <p><strong><%= event.location.name %></strong></p>
+              <p><strong><%= l event.opened_at %> ～ <%= l event.closed_at %></strong></p>
+              <% if event.shop.image.present? %>
+                <div class="shop-image-home">
+                  <%= image_tag event.shop.image.url, class: "img-thumbnail-home" %>
+                </div>
+              <% else %>
+                <div class="shop-image-home">
+                  <%= image_tag 'store.jpg', alt: 'デフォルト画像', class: "img-thumbnail-home" %>
+                </div>
+              <% end %>
+            </div>
+          </li>
         <% end %>
       </ul>
     <% else %>
       <p>イベントは登録されていません</p>
     <% end %>
+    <h3>このサービスに登録しているおみせ一覧</h3>
+      <div class="row">
+        <% @vendor_shops.each do |shop| %>
+          <div class="col-md-3">
+            <div class="shop-image-home">
+              <% if shop.image.present? %>
+                <%= link_to shop_path(shop) do %>
+                  <%= image_tag shop.image.url, class: "img-thumbnail-home" %>
+                <% end %>
+              <% else %>
+                <%= link_to shop_path(shop) do %>
+                  <%= image_tag 'store.jpg', alt: 'デフォルト画像', class: "img-thumbnail-home" %>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        <% end %> <!-- この行を追加 -->
+      </div>
+    </div>
   </div>
-  
-  
-  
 </div>
+
 
 <script>
   flatpickr("#datepicker", {

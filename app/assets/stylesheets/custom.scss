@@ -79,3 +79,19 @@ li{
   max-width: 100px; /* 画像の幅を調整 */
   height: auto;
 }
+
+.shop-image-home {
+  width: 60px; /* 任意の幅を指定 */
+  height: 60px; /* 任意の高さを指定 */
+  border-radius: 50%; /* 50%に設定して正円にする */
+  overflow: hidden; /* 内容をはみ出さないようにする */
+  border: 1px solid gray; /* グレーのボーダーを追加 */
+  box-sizing: border-box; /* ボーダーの幅を要素の内側に含める */
+  margin: 10px; /* 他の正円との間隔を調整（必要に応じて調整） */
+}
+
+.shop-image-home img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 画像を領域に合わせてトリミング */
+}

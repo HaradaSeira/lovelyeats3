@@ -7,6 +7,8 @@ class HomeController < ApplicationController
       # 検索条件に合致するイベントを取得
       @events = filter_events(params[:location], params[:start_date], params[:end_date])
     end
+    
+    @vendor_shops = Shop.joins(:user).where(users: { roles: ['vendor'] })
 
     @locations = Location.all
   end

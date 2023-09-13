@@ -13,7 +13,7 @@
           </li>
         <% else %>  
           <!-- 一般ユーザー＝roles:nilの side_nav -->
-          <li><%= link_to 'アカウント情報の確認・編集', "#" %></li>
+          <li><%= link_to 'マイページ', user_profile_path(current_user) %></li>
           <li>
             <%= form_tag destroy_user_session_path, method: :delete do %>
               <%= submit_tag 'ログアウト' %>
@@ -22,9 +22,9 @@
         <% end %>
       <% else %>
         <!-- 未ログインユーザー用の side_nav -->
-        <li><%= link_to 'ユーザーアカウント作成', new_user_registration_path %></li>
-        <li><%= link_to 'ユーザーログイン', new_user_session_path %></li>
-        <li><%= link_to '出店者ログイン', user_session_path %></li>
+        <li><%= link_to 'ユーザーアカウント作成', "#" %></li>
+        <li><%= link_to 'ユーザーログイン', "#" %></li>
+        <li><%= link_to '出店者ログイン', "#" %></li>
         <li><%= link_to '新規出店希望者はこちら', '#' %></li>
         <li><%= link_to '管理者限定ログイン', rails_admin_path %></li>
       <% end %>

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => 'admin', as: 'rails_admin'
   
   get 'user_dashboard', to: 'users#dashboard', as: :user_dashboard
+  get '/users/profile', to: 'users#profile', as: :user_profile
   
   resources :items, only: [:new, :create, :edit, :update, :destroy]
   

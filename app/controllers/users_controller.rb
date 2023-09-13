@@ -7,10 +7,15 @@ class UsersController < ApplicationController
     end
     
     def dashboard
-    @user = current_user
-    @shops = @user.shops
-    @items = Item.where(shop_id: @shops.pluck(:id))
+      if current_user.has_role?(:vendor)
+        @user = current_user
+        @shops = current_user.shops
+        @items = Item.where(shop_id: @shops.pluck(:id))
+      else
+        render 'home/index'
+      end
     end
+
 
   
     def edit

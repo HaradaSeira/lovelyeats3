@@ -1,25 +1,32 @@
 # frozen_string_literal: true
 
 class Admin::SessionsController < Devise::SessionsController
-  # before_action :configure_sign_in_params, only: [:create]
+  before_action :configure_sign_in_params, only: [:create]
   layout 'admin'
-  # GET /resource/sign_in
-  # def new
-  #   super
-  # end
+
+  def new
+    super
+  end
+
   # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+  # 例：セッションの開始とリダイレクト
+  def create
+    self.resource = warden.authenticate!(auth_options)
+    sign_in(resource_name, resource)
+    respond_with resource, location: after_sign_in_path_for(resource)
+  end
+
 
   # DELETE /resource/sign_out
-  # def destroy
-  #   super
-  # end
+  def destroy
+    super
+  end
 
-  # protected
+  protected
+
+  # サインアウト後のリダイレクト先を指定
   def after_sign_out_path_for(resource)
-    admin_login_path
+    rails_admin_path
   end
 
   # If you have extra params to permit, append them to the sanitizer.

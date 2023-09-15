@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   
   get 'user_dashboard', to: 'users#dashboard', as: :user_dashboard
   get '/users/profile', to: 'users#profile', as: :user_profile
+  get '/shops/profile', to: 'shops#profile'
   
   resources :items, only: [:new, :create, :edit, :update, :destroy]
   

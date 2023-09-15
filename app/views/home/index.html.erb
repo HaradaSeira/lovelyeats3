@@ -51,7 +51,7 @@
           <div class="col-md-3">
             <div class="shop-image-home">
               <% if shop.image.present? %>
-                <%= link_to shop_path(shop) do %>
+                <%= link_to "#" do %>
                   <%= image_tag shop.image.url, class: "img-thumbnail-home" %>
                 <% end %>
               <% else %>

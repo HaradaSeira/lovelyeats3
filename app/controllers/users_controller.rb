@@ -1,33 +1,10 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
-  
-    def item_new
-      @item = Item.new
-      redirect_to user_item_new_user_path(current_user)
-    end
+  def dashboard
+    # @locations 変数にデータをセットするクエリを実行する
+    @locations = Location.all # 例: Location モデルからすべての場所を取得する
+    @shops = Shop.where(user_id: current_user.id) # ユーザーに関連するショップを取得する
+    @items = Item.where(user_id: current_user.id) # ユーザーに関連するメニューを取得する
     
-    def dashboard
-      if current_user.has_role?(:vendor)
-        @user = current_user
-        @shops = current_user.shops
-        @items = Item.where(shop_id: @shops.pluck(:id))
-      else
-        render 'home/index'
-      end
-    end
-
-
-  
-    def edit
-    @user = User.find(params[:id])
-    end
-    
-    def update
-    @user = User.find(params[:id])
-    if @user.update(user_params)
-      # 更新が成功した場合の処理
-    else
-      render 'edit'
-    end
+    # 他のコード
   end
 end

@@ -4,39 +4,7 @@
       <%= render 'shared/side_nav' %>
     </div>
     <div class="col-md-9 right-contents">
-      <% if current_user.has_role?(:vendor) %>
-        <h2><%= @shop.name %> の確認・編集</h2>
-        <%= form_for @shop, url: shop_path(@shop), method: :patch, html: { class: 'form' } do |f| %>
-          <div class="form-group">
-            <strong>おみせのなまえ</strong><br>
-            <%= f.text_field :name, class: 'form-control' %>
-          </div>
-          <div class="form-group">
-            <strong>おみせの説明</strong><br>
-            <%= f.text_area :description, class: 'form-control' %>
-          </div>
-          <div class="form-group">
-            <strong>おみせのアイコン</strong>
-          </div>
-          <div class="form-group shop-img">
-            <% if @shop.image.present? %>
-              <%= image_tag @shop.image.url, class: "img-thumbnail" %>
-            <% else %>
-              <%= image_tag 'store.jpg', alt: 'デフォルト画像', class: "img-thumbnail" %>
-            <% end %>
-            <%= f.file_field :image, class: 'form-control' %>
-          </div>
-          <%= f.submit 'おみせ情報を更新する', class: 'btn btn-primary' %>
-        <% end %>
-        <%= link_to 'このおみせを削除する', shop_path(@shop), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
-        <!-- イベント一覧を表示 -->
-        <div class="row">
-          <div class="col-md-9 right-contents">
-            <%= render 'events/index' %>
-          </div>
-        </div>
-      <% else %>
-        <h2><%= @shop.name %> の詳細</h2>
+      <h2><%= @shop.name %> の詳細</h2>
         <div class="form-group shop-img">
           <% if @shop.image.present? %>
             <%= image_tag @shop.image.url, class: "img-thumbnail" %>
@@ -52,15 +20,42 @@
         
           
         <!-- イベント一覧を表示 -->
-        <div class="row">
-          <div class="col-md-9 right-contents">
-            <%= render 'events/index' %>
-          </div>
+        <div class="container">
+          <div class="right-contents">
+            <h2><%= @shop.name %> のイベント一覧</h2>
+              <% if @events.any? %>
+                <ul class="list-group">
+                  <% @events.each do |event| %>
+                    <li class="list-group-item">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <strong>開始日時:</strong> <%= event.opened_at %><br>
+                          <strong>終了日時:</strong> <%= event.closed_at %><br>
+                        </div>
+                        <div class="col-md-6">
+                          <strong>場所:</strong> <%= event.location.name %><br>
+                          <strong>住所:</strong> <%= event.address %><br>
+                          <%= link_to 'イベント詳細', "#", class: 'btn btn-info' %>
+                    
+                        </div>
+                      </div>
+                    <% end %>
+                </ul>
+              <% else %>
+                <p>イベントは登録されていません</p>
+              <% end %>
+            </div>
+         
         </div>
-      <% end %>
+
+       <div class="row">
+        <div class="col-md-9 right-contents">
+          <!-- ここにイベント一覧を表示するコードを追加 -->
+        </div>
+      </div>
     </div>
   </div>
   <center>
-    <%= link_to '戻る', user_dashboard_path, class: 'btn btn-secondary' %>
+    <%= link_to '戻る', root_path, class: 'btn btn-secondary' %>
   </center>
 </div>

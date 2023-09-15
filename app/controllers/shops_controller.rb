@@ -17,6 +17,11 @@ class ShopsController < ApplicationController
     @events = @shop.events # イベント一覧を取得
   end
   
+  def profile
+    @shop = Shop.find(params[:id])
+    @events = @shop.events
+  end
+
   def update
     @shop = Shop.find(params[:id])
     if @shop.update(shop_params)

@@ -1,7 +1,7 @@
 <div class="container">
   <div class="right-contents">
     <h2><%= @shop.name %> のイベント一覧</h2>
-      <h3><%= link_to '＋新しいイベントを追加する', new_shop_event_path(shop_id: @shop.id), class: 'btn btn-primary' %></h3>
+      <h3><%= link_to '＋新しいイベントを追加する', new_shop_event_path(@shop), class: 'btn btn-primary' %></h3>
       <% if @events.any? %>
         <ul class="list-group">
           <% @events.each do |event| %>

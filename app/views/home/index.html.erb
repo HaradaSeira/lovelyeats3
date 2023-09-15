@@ -26,6 +26,7 @@
         <% @events.each do |event| %>
           <li class="list-group-item">
             <div class="card-body-home">
+              <% if event.opened_at.present? && event.closed_at.present? %>
               <p><strong><%= event.shop.name %></strong></p>
               <p><strong><%= event.location.name %></strong></p>
               <p><strong><%= l event.opened_at %> ～ <%= l event.closed_at %></strong></p>

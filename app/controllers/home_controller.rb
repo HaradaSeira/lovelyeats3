@@ -1,14 +1,16 @@
 class HomeController < ApplicationController
+  require 'user'
+  
   def index
-    # デフォルトではすべてのイベントを取得する条件を設定
+    # すべてのおみせを取得
+   @shops = Shop.all
+
+    # 検索条件に合致するイベントを取得
     if params[:location].blank? && params[:start_date].blank? && params[:end_date].blank?
       @events = Event.all
     else
-      # 検索条件に合致するイベントを取得
       @events = filter_events(params[:location], params[:start_date], params[:end_date])
     end
-    
-    @vendor_shops = Shop.joins(:user).where(users: { roles: ['vendor'] })
 
     @locations = Location.all
   end
@@ -17,6 +19,21 @@ class HomeController < ApplicationController
 
   def filter_events(location, start_date, end_date)
     # 検索条件に基づいてイベントを絞り込むロジックを実装
-    # ここでlocation、start_date、end_dateを使って絞り込みを行う
+    events = Event.all # すべてのイベントを取得
+
+    # ロケーションで絞り込み
+    if location.present?
+      events = events.where(location: location)
+    end
+
+    # 開始日と終了日で絞り込み
+    if start_date.present?
+      events = events.where('start_date >= ?', start_date)
+    end
+    if end_date.present?
+      events = events.where('end_date <= ?', end_date)
+    end
+
+    events # 絞り込んだイベントを返す
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_13_031641) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_13_083227) do
   create_table "event_items", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "event_id"
     t.bigint "item_id", null: false
@@ -89,6 +89,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_13_031641) do
     t.datetime "updated_at", null: false
     t.boolean "admin", default: false
     t.string "roles"
+    t.string "last_name"
+    t.string "first_name"
+    t.string "image"
+    t.string "custom_field"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

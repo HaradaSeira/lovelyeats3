@@ -1,20 +1,18 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
-       
- #enum role: { general: 0, admin: 1 }
+  
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
  
- has_many :shops
- has_many :items
- 
- 
- serialize :roles, Array
- 
-  def initialize(*args)
-    super
-    self.roles ||= [] # roles を初期化する
+  has_many :shops
+  has_many :items
+
+  serialize :roles, Array
+  
+  attr_accessor :custom_field
+  
+  after_initialize :initialize_roles
+
+  def initialize_roles
+    self.roles ||= []
   end
 
   def add_role(role)
@@ -29,9 +27,8 @@ class User < ApplicationRecord
   def has_role?(role)
     self.roles.include?(role.to_s)
   end
-  
+
   def customer?
-    role == "customer"
+    has_role?("customer") # メソッド内でroleではなくhas_role?メソッドを使用する
   end
-  
 end

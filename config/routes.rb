@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   end
 
   resources :shops, only: [:show] do
-    resources :events, only: [:new, :create]
+    resources :events, only: [:new, :create, :show, :edit, :update, :destroy]
     resources :items, only: [:new, :create] 
   end
 end

@@ -24,11 +24,6 @@
     <%= form.file_field :image, class: 'form-control' %>
   </div>
 
-  <div class="form-group">
-    <%= form.label :shop_id, 'ショップ' %>
-    <%= form.select :shop_id, current_user.shops.map { |shop| [shop.name, shop.id] }, {}, class: 'form-control' %>
-  </div>
-
       <%= form.submit '登録する', class: 'btn btn-primary' %>
     <% end %>
   </div>

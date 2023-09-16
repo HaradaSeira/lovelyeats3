@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+ 
   def new
     @shop = Shop.find(params[:shop_id])
     @event = @shop.events.build
@@ -16,15 +17,19 @@ class EventsController < ApplicationController
       render :new
     end
   end
+  
+  def edit
+    @event = Event.find(params[:id])
+    if @event.update(event_params)
+      redirect_to shop_events_path(@event), notice: 'イベントが正常に更新されました。'
+    else
+      render :edit
+    end
+  end
 
   private
 
   def event_params
-    params.require(:event).permit(
-      :opened_at,
-      :closed_at,
-      :location_id,
-      :address
-    )
+    params.require(:event).permit(:opened_at, :closed_at, :location_id, :address)
   end
 end

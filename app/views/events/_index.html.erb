@@ -1,28 +1,27 @@
 <div class="container">
   <div class="right-contents">
     <h2><%= @shop.name %> のイベント一覧</h2>
-      <h3><%= link_to '＋新しいイベントを追加する', new_shop_event_path(@shop), class: 'btn btn-primary' %></h3>
-      <% if @events.any? %>
-        <ul class="list-group">
-          <% @events.each do |event| %>
-            <li class="list-group-item">
-              <div class="row">
-                <div class="col-md-6">
-                  <strong>開始日時:</strong> <%= event.opened_at %><br>
-                  <strong>終了日時:</strong> <%= event.closed_at %><br>
-                </div>
-                <div class="col-md-6">
-                  <strong>場所:</strong> <%= event.location.name %><br>
-                  <strong>住所:</strong> <%= event.address %><br>
-                  <%= link_to 'イベント詳細', "#", class: 'btn btn-info' %>
-            
-                </div>
+    <h3><%= link_to '＋新しいイベントを追加する', new_shop_event_path(@shop), class: 'btn btn-primary' %></h3>
+    <% if @events.any? %>
+      <ul class="list-group">
+        <% @events.each do |event| %>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-6">
+                <strong>開始日時:</strong> <%= event.opened_at %><br>
+                <strong>終了日時:</strong> <%= event.closed_at %><br>
               </div>
-            <% end %>
-        </ul>
-      <% else %>
-        <p>イベントは登録されていません</p>
-      <% end %>
-    </div>
- 
+              <div class="col-md-6">
+                <strong>場所:</strong> <%= event.location.name %><br>
+                <strong>住所:</strong> <%= event.address %><br>
+                <%= link_to 'イベント詳細', edit_shop_event_path(event.shop, event), class: 'btn btn-info' %>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>イベントは登録されていません</p>
+    <% end %>
+  </div>
 </div>

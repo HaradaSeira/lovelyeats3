@@ -20,8 +20,8 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :shops, only: [:show] do
-    resources :events, only: [:new, :create, :show, :edit, :update, :destroy]
+  resources :shops do
+    resources :events #
     resources :items, only: [:new, :create] 
   end
 end

@@ -25,6 +25,17 @@
         <%= form.label :address, '場所（例：「本部棟2階エントランス」など）' %>
         <%= form.text_area :address, class: 'form-control' %>
       </div>
+      
+      <div class="form-group">
+        <%= form.label :item_ids, '提供するメニューを選択' %>
+        <% @user_items.each do |item| %>
+          <div class="form-check">
+            <%= form.check_box :item_ids, { multiple: true }, item.id, nil %>
+            <%= form.label "event_item_#{item.id}", item.name %>
+          </div>
+        <% end %>
+      </div>
+      
 
       <%= form.submit '登録する', class: 'btn btn-primary' %>
     <% end %>

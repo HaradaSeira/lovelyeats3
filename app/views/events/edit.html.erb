@@ -6,7 +6,7 @@
     <div class="col-md-9 right-contents">
       <h2><%= @event.shop.name %>の<%= @event.opened_at.strftime('%Y年%-m月%-d日（%A）') %>のイベント</h2>
 
-      <%= form_for @event, url: shop_event_path(@event.shop, @event), method: :patch, html: { class: 'form' } do |f| %>
+      <%= form_for [@event.shop, @event], url: shop_event_path(@event.shop, @event), method: :put, html: { class: 'form' } do |f| %>
         <div class="card-body">
           <div class="form-group">
             <strong>キャンパス</strong><br>
@@ -24,10 +24,19 @@
             <strong>閉店時間</strong><br>
             <%= f.datetime_local_field :closed_at, class: "form-control" %>
           </div>
+          <div class="form-group">
+            <strong>提供するメニュー</strong><br>
+            <% @user_items.each do |item| %>
+              <div class="form-check">
+                <%= f.check_box :item_ids, { multiple: true }, item.id, nil %>
+                <%= f.label "event_item_#{item.id}", item.name %>
+              </div>
+            <% end %>
+          </div>
         </div>
         <div class="card-footer">
-          <%= f.submit "更新", class: "btn btn-primary" %>
-          <%= link_to '戻る', user_dashboard_path, class: 'btn btn-secondary' %>
+          <%= f.submit "更新する", class: "btn btn-primary" %>
+          <%= link_to '戻る', "#", class: 'btn btn-secondary' %>
         </div>
       <% end %>
     </div>

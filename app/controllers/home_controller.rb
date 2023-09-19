@@ -4,7 +4,14 @@ class HomeController < ApplicationController
   def index
     # すべてのおみせを取得
    @shops = Shop.all
-
+    if current_user && current_user.has_role?(:vendor)
+      # ログインユーザーがベンダーの場合は dashboard を表示
+      render 'users/dashboard' # home/index.html.erbを表示
+    else
+      # 一般ユーザーまたは未ログインの場合は home/index を表示
+      render 'home/index'
+    end
+      
     # 検索条件に合致するイベントを取得
     if params[:location].blank? && params[:start_date].blank? && params[:end_date].blank?
       @events = Event.all

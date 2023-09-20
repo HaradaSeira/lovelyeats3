@@ -10,7 +10,13 @@ Rails.application.routes.draw do
   get '/shops/profile', to: 'shops#profile'
   
   resources :items, only: [:new, :create, :edit, :update, :destroy, :show]
+
+  resources :items do
+    post 'favorites', to: 'favorites#create', on: :member
+  end
   
+  resources :favorites, only: [:create, :destroy]
+
   resources :users do
     member do
       get :dashboard

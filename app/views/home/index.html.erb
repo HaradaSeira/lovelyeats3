@@ -23,28 +23,21 @@
     </div>
 
     <% if @events.any? %>
-      <ul class="list-group">
+      <ul>
         <% @events.each do |event| %>
-          <li class="list-group-item">
+          <li>
             <%= link_to shop_event_path(event.shop, event) do %>
-              <div class="card-body-home">
-                <% if event.opened_at.present? && event.closed_at.present? %>
-                  <p><strong><%= event.shop.name %></strong></p>
-                  <p><strong><%= event.location.name %></strong></p>
-                  <p><strong><%= l event.opened_at %> ～ <%= l event.closed_at %></strong></p>
-                  <% if event.shop.image.present? %>
-                    <div class="shop-image-home">
-                      <%= image_tag event.shop.image.url, class: "img-thumbnail-home" %>
-                    </div>
+              <div class="card-body" style="background-image: url('<%= event.shop.image.url %>');">
+                <div class="card-body-home">
+                  <% if event.opened_at.present? && event.closed_at.present? %>
+                    <p><strong><%= l event.opened_at %></strong></p>
+                    <p><strong><%= event.shop.name %></strong></p>
+                    <p><strong><%= event.location.name %></strong></p>
+                    
                   <% else %>
-                    <div class="shop-image-home">
-                      <%= image_tag 'store.jpg', alt: 'デフォルト画像', class: "img-thumbnail-home" %>
-                    </div>
+                    <!-- ここに条件に応じた処理を追加 -->
                   <% end %>
-                <% else %>
-                  <!-- ここに条件に応じた処理を追加 -->
-                <% end %>
-              </div>
+                </div>
             <% end %>
           </li>
         <% end %>

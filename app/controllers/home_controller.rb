@@ -28,6 +28,8 @@ class HomeController < ApplicationController
       puts "Rendering home/index (guest)"
       render 'home/index'
     end
+    
+   @items = Item.all
 
 
     

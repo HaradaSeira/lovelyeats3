@@ -12,22 +12,23 @@
         
         <% if @item.image.present? %>
           <div class="item-image">
-            <%= (image_tag(@item.image.url, class: "img-thumbnail")) %>
+            <%= image_tag(@item.image.url, class: "img-thumbnail") %>
           </div>
         <% else %>
           <div class="item-image">
-            <%= (image_tag('menu.jpg', alt: 'デフォルト画像', class: "img-thumbnail")) %>
+            <%= image_tag('menu.jpg', alt: 'デフォルト画像', class: "img-thumbnail") %>
           </div>
         <% end %>
 
         <!-- いいねボタン -->
-        <%= form_for Favorite.new, url: item_favorites_path(@item), method: :post do |f| %>
-          <%= f.hidden_field :item_id, value: @item.id %>
-          <%= f.submit "いいね", class: "heart-img" %>
-        <% end %>
-
-        <% if current_user.favorites.exists?(item_id: @item.id) %>
-          <p>お気に入り済み</p>
+        <% if !@item.user == current_user %>
+          <%= link_to favorites_item_path(@item, method: :post) do %>
+            <%= image_tag('heart-black.png', class: 'heart-img', alt: 'いいね') %>
+          <% end %>
+        <% else %>
+          <%= link_to favorite_path(@item), method: :delete do %>
+            <%= image_tag 'heart-red.png', class: 'heart-img' %>
+          <% end %>
         <% end %>
       </div>
     </div>

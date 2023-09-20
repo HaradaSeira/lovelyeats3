@@ -34,7 +34,6 @@ header {
 }
 
 
-
 .shop-img {
   width: 200px;
   height: auto; 
@@ -70,10 +69,23 @@ li{
  }
 
 .card-body-home {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  width: 300px; /* カードの幅 */
+  height: auto; /* 高さはコンテンツに合わせて自動調整 */
+  margin: 10px; /* カードの周囲のマージン */
+  padding: 20px; /* カード内部のパディング */
+  background-color: rgba(255, 255, 255, 0.8); /* 背景色を透過させる（ここでは0.8の透明度を設定） */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* 影の効果 */
+  background-image: url('shop-image.jpg'); /* shop imageのファイルパスを指定 */
+  background-size: cover; /* 背景画像をカード全体に広げる */
+  background-position: center center; /* 背景画像を中央に配置 */
 }
+
+
+.shop-image-index {
+  
+  
+}
+
 
 .card-body img {
   max-width: 100px; /* 画像の幅を調整 */
@@ -87,7 +99,7 @@ li{
   overflow: hidden; /* 内容をはみ出さないようにする */
   border: 1px solid gray; /* グレーのボーダーを追加 */
   box-sizing: border-box; /* ボーダーの幅を要素の内側に含める */
-  margin: 10px; /* 他の正円との間隔を調整（必要に応じて調整） */
+  margin-right: 20px; /* 右にマージンを追加 */
 }
 
 .shop-image-home img {
@@ -103,6 +115,10 @@ li{
 
 .heart-img {
   background-image: url('heart-black.png');
+  width: 35px;
+  height: 30px;
+  margin-left: 20px;
+  color: #808080;
   /* 画像のサイズや表示位置などのスタイルを設定 */
 }
 

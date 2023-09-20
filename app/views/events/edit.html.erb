@@ -36,6 +36,7 @@
         </div>
         <div class="card-footer">
           <%= f.submit "更新する", class: "btn btn-primary" %>
+          <%= link_to 'イベント詳細ページを確認', shop_event_path(@event), class: 'btn btn-secondary' %>
           <%= link_to '戻る', "#", class: 'btn btn-secondary' %>
         </div>
       <% end %>

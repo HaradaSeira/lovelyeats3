@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <%= render 'shared/side_nav' %>
+    </div>
+    <div class="col-md-9 right-contents">
+      <h2><%= @item.name %>の詳細</h2>
+      
+      <div class="card-body">
+        <p><strong>メニューのせつめい:</strong> <%= @item.description %></p>
+        <p><strong>価格:</strong> <%= @item.price %> 円</p>
+        
+        <% if @item.image.present? %>
+          <div class="item-image">
+            <%= (image_tag(@item.image.url, class: "img-thumbnail")) %>
+          </div>
+        <% else %>
+          <div class="item-image">
+            <%= (image_tag('menu.jpg', alt: 'デフォルト画像', class: "img-thumbnail")) %>
+          </div>
+        <% end %>
+
+        <!-- いいねボタン -->
+        <%= form_for Favorite.new, url: item_favorites_path(@item), method: :post do |f| %>
+          <%= f.hidden_field :item_id, value: @item.id %>
+          <%= f.submit "いいね", class: "heart-img" %>
+        <% end %>
+
+        <% if current_user.favorites.exists?(item_id: @item.id) %>
+          <p>お気に入り済み</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

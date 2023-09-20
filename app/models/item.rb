@@ -6,4 +6,7 @@ class Item < ApplicationRecord
   has_many :events, through: :event_items
   has_and_belongs_to_many :shops
   
+  has_many :favorites
+  has_many :favorited_by, through: :favorites, source: :user
+  
 end

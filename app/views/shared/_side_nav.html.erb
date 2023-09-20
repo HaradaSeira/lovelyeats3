@@ -5,7 +5,7 @@
         <% if current_user.has_role?(:vendor) %>
           <!-- 出店者＝roles:vendor用の side_nav -->
           <li><%= link_to 'おみせ一覧', user_dashboard_path(current_user) %></li>
-          <li><%= link_to 'TOPページ', "#" %></li>
+          <li><%= link_to 'TOPページ', root_path %></li>
           <li>
             <%= form_tag destroy_user_session_path, method: :delete do %>
               <%= submit_tag 'ログアウト' %>
@@ -13,6 +13,7 @@
           </li>
         <% else %>  
           <!-- 一般ユーザー＝roles:nilの side_nav -->
+          <li><%= link_to 'TOPページ', root_path %></li>
           <li><%= link_to 'マイページ', user_profile_path(current_user) %></li>
           <li>
             <%= form_tag destroy_user_session_path, method: :delete do %>
@@ -29,5 +30,6 @@
         <li><%= link_to '管理者限定ログイン', rails_admin_path %></li>
       <% end %>
     </ul>
+    
   </span>
 </div>

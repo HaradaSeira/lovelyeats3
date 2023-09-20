@@ -95,3 +95,19 @@ li{
   height: 100%;
   object-fit: cover; /* 画像を領域に合わせてトリミング */
 }
+
+.circle-image {
+  border-radius: 50%; /* 50% で正円に切り抜きます */
+  overflow: hidden; /* 余分な部分を非表示にします */
+}
+
+.heart-img {
+  background-image: url('heart-black.png');
+  /* 画像のサイズや表示位置などのスタイルを設定 */
+}
+
+/* クリックした状態 */
+.heart-img:hover {
+  background-image: url('heart-red.png');
+  /* クリックした際の画像のスタイルを設定 */
+}

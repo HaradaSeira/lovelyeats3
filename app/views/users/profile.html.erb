@@ -1,7 +1,35 @@
 <div class="container">
   <%= render 'shared/side_nav' %>
   <div class="right-contents">
-    <h2><%= current_user.email %> さんのマイページ</h2>
+    <h2><%= current_user.last_name.presence || "『ニックネーム』" %> さんのマイページ</h2>
+      <%= form_for @user, url: user_profile_path, method: :patch, html: { multipart: true } do |f| %>
+        <div class="form-group">
+          <%= f.label :last_name, "ニックネーム" %>
+          <%= f.text_field :last_name, class: "form-control" %>
+        </div>
+        
+        <div class="form-group">
+          <%= f.label :email, "メールアドレス" %>
+          <%= f.email_field :email, class: "form-control" %>
+        </div>
+        
+        <!-- プロフィール画像のアップロード -->
+        <div class="form-group user-img">
+          <strong>アイコン</strong>
+          <% if @user.image.present? %>
+            <%= image_tag @user.image.url, class: "img-thumbnail circle-image" %>
+          <% else %>
+            <%= image_tag 'icon_user.png', alt: 'デフォルト画像', class: "img-thumbnail circle-image" %>
+          <% end %>
+          <%= f.file_field :image, class: 'form-control' %>
+        </div>
+        
+        <div class="actions">
+          <%= f.submit "更新", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+        
+    <h2>「いいね」したメニュー</h2>
     
     
     

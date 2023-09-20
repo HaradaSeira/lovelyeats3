@@ -1,9 +1,13 @@
 class User < ApplicationRecord
+  mount_uploader :image, ImageUploader
   
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
  
   has_many :shops
   has_many :items
+  
+  has_many :favorites
+  has_many :favorited_items, through: :favorites, source: :item
 
   serialize :roles, Array
   

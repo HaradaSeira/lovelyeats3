@@ -17,23 +17,34 @@
             <p><strong>提供されるメニュー:</strong></p>
             <ul>
               <% @event_items.each do |item| %>
-                <li><%= item.name %></li>
+                <li>
+                  <%= link_to item.name, item_path(item, user_id: current_user) %>
+                </li>
+                <% if item.image.present? %>
+                  <div class="item-image">
+                    <%= link_to(image_tag(item.image.url, class: "img-thumbnail"), item_path(item, user_id: current_user)) %>
+                  </div>
+                <% else %>
+                  <div class="item-image">
+                    <%= link_to(image_tag('menu.jpg', alt: 'デフォルト画像', class: "img-thumbnail"), item_path(item, user_id: current_user)) %>
+                  </div>
+                <% end %>
               <% end %>
             </ul>
-  
-            <% if @event.shop.image.present? %>
-              <div class="shop-image">
-                <%= image_tag @event.shop.image.url, class: "img-thumbnail" %>
-              </div>
-            <% else %>
-              <div class="shop-image">
-                <%= image_tag 'store.jpg', alt: 'デフォルト画像', class: "img-thumbnail" %>
-              </div>
-            <% end %>
           </div>
           
           <div class="card-footer">
-            <%= link_to '戻る', user_dashboard_path, class: 'btn btn-secondary' %>
+            <%= link_to '戻る', class: 'btn btn-secondary' do %>
+              <% if current_user.present? %>
+                <% if current_user.has_role?(:vendor) %>
+                  <%= link_to 'ダッシュボード', user_dashboard_path %>
+                <% else %>
+                  <%= link_to 'TOPページへ戻る', root_path %>
+                <% end %>
+              <% else %>
+                <%= link_to 'TOPページへ戻る', root_path %>
+              <% end %>
+            <% end %>
           </div>
         </div>
       </div>

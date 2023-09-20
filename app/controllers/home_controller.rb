@@ -2,24 +2,37 @@ class HomeController < ApplicationController
   require 'user'
   
   def index
+   @locations = Location.all
     # すべてのおみせを取得
-   @shops = Shop.all
-    if current_user && current_user.has_role?(:vendor)
-      # ログインユーザーがベンダーの場合は dashboard を表示
-      render 'users/dashboard' # home/index.html.erbを表示
-    else
-      # 一般ユーザーまたは未ログインの場合は home/index を表示
-      render 'home/index'
-    end
-      
-    # 検索条件に合致するイベントを取得
+   
+   # 検索条件に合致するイベントを取得
     if params[:location].blank? && params[:start_date].blank? && params[:end_date].blank?
       @events = Event.all
     else
       @events = filter_events(params[:location], params[:start_date], params[:end_date])
     end
+    
+   @shops = Shop.all
+    if current_user
+      if current_user.has_role?(:vendor)
+        # ベンダーの場合
+        puts "Rendering users/dashboard"
+        render 'users/dashboard'
+      else
+        # 一般ユーザーの場合
+        puts "Rendering home/index"
+        render 'home/index'
+      end
+    else
+      # 未ログインの場合
+      puts "Rendering home/index (guest)"
+      render 'home/index'
+    end
+    
+   @items = Item.all
 
-    @locations = Location.all
+
+    
   end
 
   private

@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <%= render 'shared/side_nav' %>
+    </div>
+    <div class="col-md-9 right-contents">
+      <h2><%= @item.name %>の詳細</h2>
+      
+      <div class="card-body">
+        <p><strong>メニューのせつめい:</strong> <%= @item.description %></p>
+        <p><strong>価格:</strong> <%= @item.price %> 円</p>
+        
+        <% if @item.image.present? %>
+          <div class="item-image">
+            <%= image_tag(@item.image.url, class: "img-thumbnail") %>
+          </div>
+        <% else %>
+          <div class="item-image">
+            <%= image_tag('menu.jpg', alt: 'デフォルト画像', class: "img-thumbnail") %>
+          </div>
+        <% end %>
+
+        <!-- いいねボタン -->
+        <% if !@item.user == current_user %>
+          <%= link_to favorites_item_path(@item, method: :post) do %>
+            <%= image_tag('heart-black.png', class: 'heart-img', alt: 'いいね') %>
+          <% end %>
+        <% else %>
+          <%= link_to favorite_path(@item), method: :delete do %>
+            <%= image_tag 'heart-red.png', class: 'heart-img' %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

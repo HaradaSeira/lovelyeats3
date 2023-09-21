@@ -2,6 +2,19 @@ class EventsController < ApplicationController
  
   def index
     @events = Event.all
+    @event_dates = Event.pluck(:opened_at).uniq # 開催日時の一覧を取得
+    
+    # フォームから送信された日付範囲を取得
+    date_range = params[:date_range]
+
+    # date_rangeが存在する場合のみクエリを実行
+    if date_range.present?
+      start_date, end_date = date_range.split(' - ')
+      @events = Event.where('opened_at >= ? AND opened_at <= ?', Date.parse(start_date), Date.parse(end_date))
+    else
+      @events = Event.all
+    end
+    
   end
   
   def show

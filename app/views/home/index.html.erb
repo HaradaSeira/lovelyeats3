@@ -5,58 +5,48 @@
       <div class="col-md-6">
         <!-- 検索バー1 -->
         <div class="input-group mb-3">
-          <%= select_tag 'location', options_for_select(@locations.map { |location| [location.name, location.id] }), class: 'form-control', prompt: 'キャンパスで絞り込む' %>
-          <div class="input-group-append">
-            <button class="btn btn-primary" type="button">検索</button>
-          </div>
+          <%= form_tag search_by_location_path, method: :get do %>
+            <%= select_tag 'location', options_for_select(@locations.map { |location| [location.name, location.id] }), class: 'form-control', prompt: 'キャンパスで絞り込む' %>
+            <div class="input-group-append">
+              <button class="btn btn-primary" type="submit">検索</button>
+            </div>
+          <% end %>
         </div>
       </div>
       <div class="col-md-6">
         <!-- 検索バー2 -->
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" id="datepicker" placeholder="日付で絞り込む">
-          <div class="input-group-append">
-            <button class="btn btn-primary" type="button">検索</button>
+        <%= form_tag(root_path, method: :get) do %>
+          <div class="input-group mb-3">
+            <%= select_tag 'event_date', options_for_select(@event_dates.map { |date| [date.to_s(:long), date] }), class: 'form-control', prompt: '日付で絞り込む' %>
+            <div class="input-group-append">
+              <%= submit_tag '検索', class: 'btn btn-primary', type: 'submit' %>
+            </div>
           </div>
-        </div>
+        <% end %>
       </div>
     </div>
-
+    
     <% if @events.any? %>
+      <!-- イベントリストの表示 -->
       <ul>
         <% @events.each do |event| %>
           <li>
             <div class="col-md-6">
               <%= link_to shop_event_path(event.shop, event) do %>
-              <div class="card-body-home" style="background-image: url('<%= event.shop.image.url %>');">
-                <div class="card-body-home">
-                  <% if event.opened_at.present? && event.closed_at.present? %>
+                <div class="card-body-home" style="background-image: url('<%= event.shop.image.url %>');">
+                  <div class="card-body-home">
                     <p><strong><%= l event.opened_at %></strong></p>
                     <p><strong><%= event.shop.name %></strong></p>
                     <p><strong><%= event.location.name %></strong></p>
-                  <% else %>
-                    <!-- ここに条件に応じた処理を追加 -->
-                  <% end %>
+                  </div>
                 </div>
-              </div>
-            
-            <% end %>
-          </div>
+              <% end %>
+            </div>
           </li>
-          
         <% end %>
       </ul>
     <% else %>
       <p>イベントは登録されていません</p>
     <% end %>
-
-
   </div>
 </div>
-
-<script>
-  flatpickr("#datepicker", {
-    mode: "range", // 日付の範囲を選択
-    // カレンダーのオプションをここに追加
-  });
-</script>

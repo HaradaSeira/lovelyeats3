@@ -5,6 +5,11 @@ Rails.application.routes.draw do
   
   mount RailsAdmin::Engine => 'admin', as: 'rails_admin'
   
+  
+  # config/routes.rb
+  get '/search_by_location', to: 'home#search_by_location', as: 'search_by_location'
+
+  
   get 'user_dashboard', to: 'users#dashboard', as: :user_dashboard
   get '/users/profile', to: 'users#profile', as: :user_profile
   get '/shops/profile', to: 'shops#profile'

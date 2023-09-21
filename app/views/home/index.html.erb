@@ -26,44 +26,31 @@
       <ul>
         <% @events.each do |event| %>
           <li>
-            <%= link_to shop_event_path(event.shop, event) do %>
-              <div class="card-body" style="background-image: url('<%= event.shop.image.url %>');">
+            <div class="col-md-6">
+              <%= link_to shop_event_path(event.shop, event) do %>
+              <div class="card-body-home" style="background-image: url('<%= event.shop.image.url %>');">
                 <div class="card-body-home">
                   <% if event.opened_at.present? && event.closed_at.present? %>
                     <p><strong><%= l event.opened_at %></strong></p>
                     <p><strong><%= event.shop.name %></strong></p>
                     <p><strong><%= event.location.name %></strong></p>
-                    
                   <% else %>
                     <!-- ここに条件に応じた処理を追加 -->
                   <% end %>
                 </div>
+              </div>
+            
             <% end %>
+          </div>
           </li>
+          
         <% end %>
       </ul>
     <% else %>
       <p>イベントは登録されていません</p>
     <% end %>
-      <h4>このサービスに登録しているおみせ一覧</h4>
-          <div class="row">
-            <% @shops.each do |shop| %>
-              <div class="col-md-3">
-                <div class="shop-image-home">
-                  <% if shop.image.present? %>
-                    <%= link_to shops_profile_path(id: shop.id) do %>
-                      <%= image_tag shop.image.url, class: "img-thumbnail-home" %>
-                    <% end %>
-                  <% else %>
-                    <%= link_to shops_profile_path(id: shop.id) do %>
-                      <%= image_tag 'store.jpg', alt: 'デフォルト画像', class: "img-thumbnail-home" %>
-                    <% end %>
-                  <% end %>
-                </div>
-              </div>
-            <% end %> <!-- この行を追加 -->
-          </div>
-          
+
+
   </div>
 </div>
 

@@ -30,6 +30,25 @@
         <li><%= link_to '管理者限定ログイン', rails_admin_path %></li>
       <% end %>
     </ul>
-    
+    <div class="text-center"> <!-- text-center クラスを追加 -->
+      <h4>登録しているおみせ一覧</h4>
+      <div class="row">
+        <% @shops.each do |shop| %>
+          <div class="col-md-6">
+            <div class="shop-image-home">
+              <% if shop.image.present? %>
+                <%= link_to shops_profile_path(id: shop.id) do %>
+                  <%= image_tag shop.image.url, class: "img-thumbnail-home" %>
+                <% end %>
+              <% else %>
+                <%= link_to shops_profile_path(id: shop.id) do %>
+                  <%= image_tag 'store.jpg', alt: 'デフォルト画像', class: "img-thumbnail-home" %>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </span>
 </div>

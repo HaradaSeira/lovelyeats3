@@ -4,7 +4,7 @@
       <%= render 'shared/side_nav' %>
     </div>
     <div class="col-md-9 right-contents">
-      <h2><%= @event.shop.name %>の<%= @event.opened_at.strftime('%Y年%-m月%-d日（%A）') %>のイベント</h2>
+      <h2><%= @event.shop.name %><% if @event.opened_at.present? %>の<%= @event.opened_at.strftime('%Y年%-m月%-d日（%A）') %>の<% end %>イベント</h2>
 
       <%= form_for [@event.shop, @event], url: shop_event_path(@event.shop, @event), method: :put, html: { class: 'form' } do |f| %>
         <div class="card-body">

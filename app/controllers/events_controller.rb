@@ -8,6 +8,8 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     @shop = @event.shop # イベントに関連するショップ情報を取得
     @event_items = @event.items # イベントが提供するアイテムのリストを取得
+    @shops = Shop.all # すべてのショップを取得
+    
   end
   
   def new
@@ -15,6 +17,7 @@ class EventsController < ApplicationController
     @event = @shop.events.build
     @locations = Location.all
     @user_items = current_user.items
+    @shops = Shop.all # すべてのショップ情報を取得（任意の場合）
   end
 
   def create
@@ -34,6 +37,7 @@ class EventsController < ApplicationController
     @shop = Shop.find(params[:shop_id]) # 必要ならば、店舗を取得
     @event = @shop.events.find(params[:id]) # 店舗内のイベントを取得
     @user_items = current_user.items
+    @shops = Shop.all # すべてのショップ情報を取得（任意の場合）
   end
 
   def update

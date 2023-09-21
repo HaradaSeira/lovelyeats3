@@ -15,6 +15,7 @@ class ShopsController < ApplicationController
   def show
     @shop = Shop.find(params[:id])
     @events = @shop.events # イベント一覧を取得
+    @shops = Shop.all # すべてのショップ情報を取得（任意の場合）
   end
   
   def profile

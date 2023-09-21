@@ -9,6 +9,7 @@ class ItemsController < ApplicationController
   def show
     @item = Item.find(params[:id])
     @user = @item.user
+    @shops = Shop.all # すべてのショップ情報を取得（任意の場合）
   end
 
   def new
@@ -37,6 +38,7 @@ class ItemsController < ApplicationController
   
   def edit
     @item = current_user.items.find(params[:id])
+    @shops = Shop.all # すべてのショップ情報を取得（任意の場合）
   end
 
   def update

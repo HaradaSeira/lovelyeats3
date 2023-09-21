@@ -33,6 +33,18 @@ header {
   height: auto; 
 }
 
+.card-body-home {
+  width: 300px; /* カードの幅 */
+  height: 150px; /* カードの高さを固定 */
+  margin: 10px; /* カードの周囲のマージン */
+  padding: 20px; /* カード内部のパディング */
+  background-color: rgba(255, 255, 255, 0.5); /* 背景色を透過させる（ここでは0.5の透明度を設定） */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* 影の効果 */
+  background-image: url('shop-image.jpg'); /* shop imageのファイルパスを指定 */
+  background-size: cover; /* 背景画像をカード全体に広げる */
+  background-position: center center; /* 背景画像を中央に配置 */
+}
+
 
 .shop-img {
   width: 200px;
@@ -68,17 +80,6 @@ li{
   float: left;
  }
 
-.card-body-home {
-  width: 300px; /* カードの幅 */
-  height: auto; /* 高さはコンテンツに合わせて自動調整 */
-  margin: 10px; /* カードの周囲のマージン */
-  padding: 20px; /* カード内部のパディング */
-  background-color: rgba(255, 255, 255, 0.8); /* 背景色を透過させる（ここでは0.8の透明度を設定） */
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* 影の効果 */
-  background-image: url('shop-image.jpg'); /* shop imageのファイルパスを指定 */
-  background-size: cover; /* 背景画像をカード全体に広げる */
-  background-position: center center; /* 背景画像を中央に配置 */
-}
 
 
 .shop-image-index {

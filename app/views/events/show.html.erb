@@ -5,7 +5,10 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <h2><%= @event.shop.name %>の<%= I18n.with_locale(:ja) { @event.opened_at.strftime('%Y年%-m月%-d日（%a）') } %>のイベント</h2>
+            <h2><%= @event.shop.name %>の<%= I18n.l(@event.opened_at, format: :long) %>のイベント</h2>
+            
+            
+            
           </div>
           <div class="card-body">
             <p><strong>キャンパス:</strong> <%= @event.location.name %></p>

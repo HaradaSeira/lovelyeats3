@@ -2,6 +2,19 @@ class EventsController < ApplicationController
  
   def index
     @events = Event.all
+    @event_dates = Event.pluck(:opened_at).uniq # 開催日時の一覧を取得
+    
+    # フォームから送信された日付範囲を取得
+    date_range = params[:date_range]
+
+    # date_rangeが存在する場合のみクエリを実行
+    if date_range.present?
+      start_date, end_date = date_range.split(' - ')
+      @events = Event.where('opened_at >= ? AND opened_at <= ?', Date.parse(start_date), Date.parse(end_date))
+    else
+      @events = Event.all
+    end
+    
   end
   
   def show
@@ -13,9 +26,9 @@ class EventsController < ApplicationController
   end
   
   def new
+    @locations = Location.all
     @shop = Shop.find(params[:shop_id])
     @event = @shop.events.build
-    @locations = Location.all
     @user_items = current_user.items
     @shops = Shop.all # すべてのショップ情報を取得（任意の場合）
   end
@@ -24,10 +37,13 @@ class EventsController < ApplicationController
     @shop = Shop.find(params[:shop_id])
     @event = @shop.events.build(event_params)
     @event.item_ids = params[:event][:item_ids]
+    @shops = Shop.all
 
     if @event.save
-      redirect_to shop_events_path(@shop, @event), notice: 'イベントが正常に保存されました。'
+      #binding.pry
+      redirect_to shop_event_path(@shop, @event), notice: 'イベントが正常に保存されました。'
     else
+      #binding.pry
       flash.now[:alert] = @event.errors.full_messages.join(', ')
       render :new
     end
@@ -56,6 +72,18 @@ class EventsController < ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:opened_at, :closed_at, :location_id, :address, item_ids: [])
+    # パラメーターの許可と必要なフィールドの取得
+    permitted_params = params.require(:event).permit(:open_date, :open_time, :closed_at, :location_id, :address, item_ids: [])
+  
+    # open_date と open_time を結合して opened_at を生成
+    permitted_params[:opened_at] = "#{permitted_params[:open_date]} #{permitted_params[:open_time]}"
+  
+    # 不要なパラメーターの削除
+    permitted_params.delete(:open_date)
+    permitted_params.delete(:open_time)
+  
+    # 修正されたパラメーターを返す
+    permitted_params
   end
+
 end

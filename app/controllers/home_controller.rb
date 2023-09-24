@@ -13,6 +13,7 @@ class HomeController < ApplicationController
     end
     
     @shops = Shop.all
+    @items = Item.all
     
     if current_user
       if current_user.has_role?(:vendor)
@@ -29,8 +30,6 @@ class HomeController < ApplicationController
       puts "Rendering home/index (guest)"
       render 'home/index'
     end
-
-    @items = Item.all
   end
 
   def search_by_location

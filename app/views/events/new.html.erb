@@ -13,18 +13,15 @@
         <%= form.date_field :open_date, class: 'form-control' %>
       </div>
       
-      
-      
       <div class="form-group">
         <%= form.label :open_time, '開店時間' %>
         <%= form.time_field :open_time, class: 'form-control' %>
       </div>
       
       
-
       <div class="form-group">
-        <%= form.label :closed_at, 'イベント終了日時' %>
-        <%= form.datetime_local_field :closed_at, class: 'form-control' %>
+        <%= form.label :close_time, '閉店時間' %>
+        <%= form.time_field :close_time, class: 'form-control' %>
       </div>
 
       <div class="form-group">

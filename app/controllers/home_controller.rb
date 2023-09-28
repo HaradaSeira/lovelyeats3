@@ -4,17 +4,21 @@ class HomeController < ApplicationController
   def index
     @locations = Location.all
     @event_dates = Event.pluck(:opened_at).uniq
-
-    # 検索条件に合致するイベントを取得
+  
+      # 検索条件に合致するイベントを取得
     if params[:location].blank? && params[:start_date].blank? && params[:end_date].blank?
-      @events = Event.all
+      @events = Event.where('closed_at >= ?', Time.now)  # 終了していないイベントを表示
     else
       @events = filter_events(params[:location], params[:start_date], params[:end_date])
+                      .where('closed_at >= ?', Time.now)  # 終了していないイベントを表示
     end
-    
+  
+    # 特定のイベントを表示したい場合（例: 1番目のイベントを表示）
+    @event = @events.first
+  
     @shops = Shop.all
     @items = Item.all
-    
+  
     if current_user
       if current_user.has_role?(:vendor)
         # ベンダーの場合
@@ -32,14 +36,23 @@ class HomeController < ApplicationController
     end
   end
 
+
   def search_by_location
-    location_id = params[:location]
-    @events = Event.where(location_id: location_id)
-    @locations = Location.all
-    @shops = Shop.all # ショップ情報も必要かつ値を持たせる
+      @locations = Location.all
+      
+    if params[:location].present?
+      location = Location.find(params[:location])
+      @events = location.events
+      @event_dates = @events.pluck(:opened_at).uniq
+      @event = @events.first # この行を追加することで@eventを設定
+    else
+      @events = Event.all
+      @event_dates = @events.pluck(:opened_at).uniq
+    end
+  
     render 'home/index'
   end
-
+  
   private
 
   def filter_events(location, start_date, end_date)
@@ -48,7 +61,7 @@ class HomeController < ApplicationController
   
     # ロケーションで絞り込み
     if location.present?
-      events = events.where(location: location)
+      events = events.where(location_id: location)
     end
   
     # 開始日と終了日で絞り込み

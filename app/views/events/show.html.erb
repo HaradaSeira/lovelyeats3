@@ -5,16 +5,20 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <h2><%= @event.shop.name %>の<%= I18n.l(@event.opened_at, format: :long) %>のイベント</h2>
-            
-            
+            <% if @event.opened_at.present? %>
+              <h2><%= @event.shop.name %>の<%= I18n.l(@event.opened_at, format: :long) %>のイベント</h2>
+            <% else %>
+              <h2><%= @event.shop.name %>のイベント</h2>
+            <% end %>
             
           </div>
           <div class="card-body">
             <p><strong>キャンパス:</strong> <%= @event.location.name %></p>
             <p><strong>場所:</strong> <%= @event.address %></p>
-            <p><strong>開店時間:</strong> <%= @event.opened_at.strftime('%-H時%M分') %></p>
+            <p><strong>営業日:</strong> <%= I18n.l(@event.opened_at.to_date, format: :long) %></p>
+            <p><strong>開店時間:</strong><%= @event.opened_at.strftime('%-H時%M分') %></p>
             <p><strong>閉店時間:</strong> <%= @event.closed_at.strftime('%-H時%M分') %></p>
+
             <p><strong>おみせのせつめい:</strong> <%= @event.shop.description %></p>
             <p><strong>提供されるメニュー:</strong></p>
             <ul>
@@ -39,7 +43,7 @@
             <%= link_to '戻る', class: 'btn btn-secondary' do %>
               <% if current_user.present? %>
                 <% if current_user.has_role?(:vendor) %>
-                  <%= link_to 'ダッシュボード', user_dashboard_path %>
+                  <%= link_to 'ダッシュボードへ戻る', user_dashboard_path %>
                 <% else %>
                   <%= link_to 'TOPページへ戻る', root_path %>
                 <% end %>

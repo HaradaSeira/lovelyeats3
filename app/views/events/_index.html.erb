@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="right-contents">
+  <div class="col-md-9 right-contents">
     <h2><%= @shop.name %> のイベント一覧</h2>
     <h3><%= link_to '＋新しいイベントを追加する', new_shop_event_path(@shop), class: 'btn btn-primary' %></h3>
     <% if @events.any? %>
@@ -7,11 +7,9 @@
         <% @events.each do |event| %>
           <li class="list-group-item">
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-12"> <!-- 修正: 列のクラスを col-md-6 から col-md-12 に変更 -->
                 <strong>開始日時:</strong> <%= event.opened_at %><br>
                 <strong>終了日時:</strong> <%= event.closed_at %><br>
-              </div>
-              <div class="col-md-6">
                 <strong>場所:</strong> <%= event.location.name %><br>
                 <strong>住所:</strong> <%= event.address %><br>
                 <%= link_to 'イベント詳細', edit_shop_event_path(@shop, event), class: 'btn btn-info' %>

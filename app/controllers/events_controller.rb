@@ -72,18 +72,22 @@ class EventsController < ApplicationController
   private
 
   def event_params
-    # パラメーターの許可と必要なフィールドの取得
-    permitted_params = params.require(:event).permit(:open_date, :open_time, :closed_at, :location_id, :address, item_ids: [])
-  
-    # open_date と open_time を結合して opened_at を生成
-    permitted_params[:opened_at] = "#{permitted_params[:open_date]} #{permitted_params[:open_time]}"
-  
-    # 不要なパラメーターの削除
-    permitted_params.delete(:open_date)
-    permitted_params.delete(:open_time)
-  
-    # 修正されたパラメーターを返す
-    permitted_params
+  # パラメーターの許可と必要なフィールドの取得
+  permitted_params = params.require(:event).permit(:open_date, :open_time, :close_date, :close_time, :location_id, :address, item_ids: [])
+
+  # open_date と open_time を結合して opened_at を生成
+  opened_at = "#{permitted_params[:open_date]} #{permitted_params[:open_time]}"
+  closed_at = "#{permitted_params[:close_date]} #{permitted_params[:close_time]}"
+
+  # 不要なパラメーターの削除
+  permitted_params.delete(:open_date)
+  permitted_params.delete(:open_time)
+  permitted_params.delete(:close_date)
+  permitted_params.delete(:close_time)
+
+  # 修正されたパラメーターを返す
+  permitted_params.merge(opened_at: opened_at, closed_at: closed_at)
   end
+
 
 end

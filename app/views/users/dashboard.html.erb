@@ -31,7 +31,7 @@
      <h2><%= current_user.email %> さんのメニュー一覧</h2>
      <h3><%= link_to '＋新しいメニューを追加する', new_item_path, class: 'btn btn-primary' %></h3>
      <% if @items.any? %>
-      <ul class="list-group">
+      <ul class="list-group item-list">
         <% @items.each do |item| %>
           <li class="list-group-item">
             <div class="row">

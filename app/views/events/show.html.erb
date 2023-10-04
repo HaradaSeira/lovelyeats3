@@ -16,27 +16,27 @@
             <p><strong>キャンパス:</strong> <%= @event.location.name %></p>
             <p><strong>場所:</strong> <%= @event.address %></p>
             <p><strong>営業日:</strong> <%= I18n.l(@event.opened_at.to_date, format: :long) %></p>
-            <p><strong>開店時間:</strong><%= @event.opened_at.strftime('%-H時%M分') %></p>
-            <p><strong>閉店時間:</strong> <%= @event.closed_at.strftime('%-H時%M分') %></p>
+            <p><strong>営業時間:</strong><%= @event.opened_at.strftime('%-H時%M分') %> ～ <%= @event.closed_at.strftime('%-H時%M分') %></p>
 
             <p><strong>おみせのせつめい:</strong> <%= @event.shop.description %></p>
-            <p><strong>提供されるメニュー:</strong></p>
-            <ul>
+            <p><strong>提供予定メニュー:</strong></p>
+            <div class="card-deck">
               <% @event_items.each do |item| %>
-                <li>
-                  <%= link_to item.name, item_path(item, user_id: current_user) %>
-                </li>
-                <% if item.image.present? %>
-                  <div class="item-image">
-                    <%= link_to(image_tag(item.image.url, class: "img-thumbnail"), item_path(item, user_id: current_user)) %>
+                <div class="card">
+                  <% if item.image.present? %>
+                    <%= link_to(image_tag(item.image.url, class: "card-img-top"), item_path(item, user_id: current_user)) %>
+                  <% else %>
+                    <%= link_to(image_tag('menu.jpg', alt: 'デフォルト画像', class: "card-img-top"), item_path(item, user_id: current_user)) %>
+                  <% end %>
+                  <div class="card-body">
+                    <h5 class="card-title"><%= item.name %></h5>
+                    <% if item.price.present? %>
+                      <p class="card-text">価格: <%= item.price %>円</p>
+                    <% end %>
                   </div>
-                <% else %>
-                  <div class="item-image">
-                    <%= link_to(image_tag('menu.jpg', alt: 'デフォルト画像', class: "img-thumbnail"), item_path(item, user_id: current_user)) %>
-                  </div>
-                <% end %>
+                </div>
               <% end %>
-            </ul>
+            </div>
           </div>
           
           <div class="card-footer">

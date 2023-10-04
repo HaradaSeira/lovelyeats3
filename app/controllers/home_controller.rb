@@ -3,7 +3,9 @@ class HomeController < ApplicationController
   
   def index
     @locations = Location.all
-    @event_dates = Event.pluck(:opened_at).uniq
+    #binding.pry
+      
+    @event_dates = Event.where('opened_at >= ?', Date.tomorrow).pluck(:opened_at).uniq.map { |date| I18n.l(date.to_date, format: :default) }
   
       # 検索条件に合致するイベントを取得
     if params[:location].blank? && params[:start_date].blank? && params[:end_date].blank?
@@ -40,16 +42,18 @@ class HomeController < ApplicationController
   def search_by_location
       @locations = Location.all
       
-    if params[:location].present?
+    if params[:location] == "全件"
+      @events = Event.all
+      @event_dates = @events.pluck(:opened_at).uniq
+      
+    else
       location = Location.find(params[:location])
       @events = location.events
       @event_dates = @events.pluck(:opened_at).uniq
       @event = @events.first # この行を追加することで@eventを設定
-    else
-      @events = Event.all
-      @event_dates = @events.pluck(:opened_at).uniq
+    
     end
-  
+    #binding.pry
     render 'home/index'
   end
   

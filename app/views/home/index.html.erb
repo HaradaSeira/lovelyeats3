@@ -6,7 +6,7 @@
         <!-- 検索バー1 -->
         <%= form_tag search_by_location_path, method: :get do %>
           <div class="input-group mb-3">
-            <%= select_tag 'location', options_for_select(@locations.map { |location| [location.name, location.id] }), class: 'form-control', prompt: 'キャンパスで絞り込む' %>
+            <%= select_tag 'location', options_for_select(@locations.pluck(:name).push("全件")), class: 'form-control', prompt: 'キャンパスで絞り込む' %>
             <div class="input-group-append">
               <%= submit_tag '検索', class: 'btn btn-primary', type: 'submit' %>
             </div>
@@ -28,10 +28,6 @@
       </div>
     </div>
 
-      <% if @location.present? %>
-        <p><strong>絞り込み条件:</strong> <%= @location.name %>で絞り込んだ結果</p>
-      <% end %>
-
     <% if @events.any? %>
       <!-- イベントリストの表示 -->
       <ul>
@@ -41,8 +37,8 @@
               <%= link_to shop_event_path(event.shop, event) do %>
                 <div class="card-body-home" style="background-image: url('<%= event.shop.image.url %>');">
                   <div class="card-information">
-                    <p><strong>営業日:</strong> <%= I18n.l(@event.opened_at.to_date, format: :long) %></p>
-                    <p><strong>営業時間:</strong><%= @event.opened_at.strftime('%-H時%M分') %>～ <%= @event.closed_at.strftime('%-H時%M分') %></p>
+                    <p><strong>営業日:</strong> <%= I18n.l(event.opened_at.to_date, format: :long) %></p>
+                    <p><strong>営業時間:</strong><%= event.opened_at.strftime('%-H時%M分') %>～ <%= event.closed_at.strftime('%-H時%M分') %></p>
 
                     <p><strong>店舗名:</strong> <%= event.shop.name %></p>
                     <p><strong>キャンパス:</strong> <%= event.location.name %></p>
